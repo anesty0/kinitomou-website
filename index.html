@@ -3,346 +3,1099 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kinitomou — your AI receptionist</title>
-<meta name="description" content="Kinitomou is an AI receptionist that answers your business phone day and night. It books appointments, answers questions and takes messages while you get on with your work.">
-<meta property="og:title" content="Kinitomou — the receptionist that never misses a call">
+<title>Kinitomou — the AI receptionist that never sleeps</title>
+<meta name="description" content="Kinitomou is an AI receptionist that answers your business phone day and night. It books appointments, answers questions and takes messages, so every caller gets a real answer.">
+<meta property="og:title" content="Kinitomou — the receptionist that never sleeps">
 <meta property="og:description" content="An AI receptionist that answers your business phone day and night.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#F7F7F4">
+<meta name="theme-color" content="#090B0B">
+<meta name="color-scheme" content="dark">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Inter+Tight:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;family=Instrument+Serif:ital@1&amp;display=swap" rel="stylesheet">
 <style>
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;background:#090B0B}
 html,body{overflow-x:clip}
-@media (max-width:600px){.nav-link{display:none}}
-body{margin:0;background:#F7F7F4}
-section[id]{scroll-margin-top:16px}
-a{color:#151714}a:hover{color:#0D6B4B}
+body{margin:0;background:#090B0B}
+section[id]{scroll-margin-top:72px}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid #5CF0AE;outline-offset:3px}
+a{color:#EEF3F0}a:hover{color:#5CF0AE}
 h1,h2,h3{text-wrap:balance}
 p{text-wrap:pretty}
-.dots{background-image:radial-gradient(#D6D6CF 1px, transparent 1px);background-size:16px 16px}
+.grid-bg{background-image:linear-gradient(rgba(238,243,240,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(238,243,240,.045) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse 70% 60% at 60% 35%,#000 20%,transparent 75%);mask-image:radial-gradient(ellipse 70% 60% at 60% 35%,#000 20%,transparent 75%)}
+.bar{display:block;width:3px;border-radius:3px;transform:scaleY(.45);transform-origin:center}
+.wave.on .bar{animation:wave 1.15s ease-in-out infinite}
+@keyframes wave{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
+.msg{animation:rise .45s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.dot{display:block;width:6px;height:6px;border-radius:50%;background:#A3ADA8;animation:blink 1.2s infinite}
+.dot:nth-child(2){animation-delay:.15s}.dot:nth-child(3){animation-delay:.3s}
+@keyframes blink{0%,80%,100%{opacity:.25}40%{opacity:1}}
+.pulse{animation:pulse 1.8s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(92,240,174,.55)}100%{box-shadow:0 0 0 10px rgba(92,240,174,0)}}
+.marquee{display:flex;width:max-content;animation:marquee 48s linear infinite}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.bento{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.span2{grid-column:span 2}
+@media (max-width:900px){.bento{grid-template-columns:minmax(0,1fr)}.span2{grid-column:auto}}
+@media (max-width:640px){.nav-link{display:none}}
+@supports (animation-timeline: view()){.reveal{animation:reveal both linear;animation-timeline:view();animation-range:entry 0% cover 22%}}
+@keyframes reveal{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
 summary::-webkit-details-marker{display:none}
-.faq-icon{transition:transform .2s ease}
+.faq-icon{transition:transform .25s ease}
 details[open] .faq-icon{transform:rotate(45deg)}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<div style="font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif; color: #151714; background: #F7F7F4; -webkit-font-smoothing: antialiased">
+<div style="font-family: Geist, system-ui, -apple-system, 'Segoe UI', sans-serif; color: #EEF3F0; background: #090B0B; -webkit-font-smoothing: antialiased">
 
-<header style="border-bottom: 1px solid #E4E4DF; background: #F7F7F4">
-<div style="max-width: 1160px; margin: 0 auto; padding: 16px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
-<a href="#top" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #151714">
-<svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="9" fill="#0D6B4B"></rect><path d="M9.5 12v6M13 9v12M16.5 11.5v7M20 13.5v3" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"></path></svg>
-<span style="font-family: 'Inter Tight', Inter, system-ui, sans-serif; font-weight: 700; font-size: 21px; letter-spacing: -0.02em">kinitomou</span>
+<header style="position: sticky; top: 0; z-index: 50; background: rgba(9,11,11,0.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid #1A201E">
+<div style="max-width: 1240px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px">
+<a href="#top" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #EEF3F0">
+<svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="9" fill="#5CF0AE"></rect><path d="M9.5 12v6M13 9v12M16.5 11.5v7M20 13.5v3" stroke="#03140C" stroke-width="2.2" stroke-linecap="round"></path></svg>
+<span style="font-weight: 600; font-size: 20px; letter-spacing: -0.03em">kinitomou</span>
 </a>
-<nav aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; gap: 28px; font-size: 15px; font-weight: 500">
-<a class="nav-link" href="#handles" style="text-decoration: none">What it handles</a>
-<a class="nav-link" href="#how" style="text-decoration: none">How it works</a>
-<a class="nav-link" href="#faq" style="text-decoration: none">FAQ</a>
-<a href="#demo" style="display: inline-flex; align-items: center; min-height: 44px; box-sizing: border-box; padding: 10px 18px; border-radius: 10px; background: #0D6B4B; color: #FFFFFF; text-decoration: none; font-weight: 600">Book a demo</a>
+<nav aria-label="Main" style="display: flex; align-items: center; gap: 28px; font-size: 14px; font-weight: 500">
+<a class="nav-link" href="#industries" style="text-decoration: none; color: #C9D1CD">Industries</a>
+<a class="nav-link" href="#listen" style="text-decoration: none; color: #C9D1CD">Listen</a>
+<a class="nav-link" href="#how" style="text-decoration: none; color: #C9D1CD">How it works</a>
+<a class="nav-link" href="#faq" style="text-decoration: none; color: #C9D1CD">FAQ</a>
+<a href="#demo" style="display: inline-flex; align-items: center; min-height: 44px; box-sizing: border-box; padding: 10px 18px; border-radius: 999px; background: #5CF0AE; color: #03140C; text-decoration: none; font-weight: 600">Book a demo</a>
 </nav>
 </div>
 </header>
 
-<section id="top" style="max-width: 1160px; margin: 0 auto; padding: 88px 24px 104px; display: flex; flex-wrap: wrap; align-items: center; gap: 72px">
-<div style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 28px">
-<h1 style="margin: 0; font-family: 'Inter Tight', Inter, system-ui, sans-serif; font-size: clamp(42px, 6vw, 70px); line-height: 1.02; letter-spacing: -0.035em; font-weight: 600">The receptionist that never misses a call.</h1>
-<p style="margin: 0; max-width: 520px; font-size: 19px; line-height: 1.6; color: #575C57">Kinitomou is an AI receptionist that answers your business phone day and night. It books appointments, answers questions and takes messages while you get on with your work.</p>
+<section id="top" style="position: relative; overflow: hidden; padding: 96px 24px 112px">
+<div class="grid-bg" aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0"></div>
+<div aria-hidden="true" style="position: absolute; top: -260px; right: -180px; width: 980px; height: 980px; background: radial-gradient(closest-side, color-mix(in oklab, #5CF0AE 22%, transparent), transparent); pointer-events: none"></div>
+<div aria-hidden="true" style="position: absolute; bottom: -320px; left: -240px; width: 720px; height: 720px; background: radial-gradient(closest-side, color-mix(in oklab, #5CF0AE 9%, transparent), transparent); pointer-events: none"></div>
+
+<div style="position: relative; max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 64px">
+<div style="flex: 1 1 540px; min-width: 0; display: flex; flex-direction: column; gap: 32px">
+<div style="align-self: flex-start; display: flex; align-items: center; gap: 10px; padding: 7px 14px 7px 10px; border: 1px solid #25302C; border-radius: 999px; background: rgba(18,23,22,0.7); font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.08em; color: #C9D1CD">
+<span class="pulse" style="width: 8px; height: 8px; border-radius: 50%; background: #5CF0AE"></span>
+<span>ANSWERING CALLS · 24/7</span>
+</div>
+<h1 style="margin: 0; font-size: clamp(52px, 7.4vw, 108px); line-height: 0.94; letter-spacing: -0.05em; font-weight: 600">The receptionist that never <span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: -0.02em; color: #5CF0AE">sleeps.</span></h1>
+<p style="margin: 0; max-width: 520px; font-size: 19px; line-height: 1.6; color: #A3ADA8">Kinitomou is an AI receptionist that answers your business phone day and night. It books appointments, answers questions and takes messages, so every caller gets a real answer.</p>
 <div style="display: flex; flex-wrap: wrap; gap: 12px">
-<a href="#demo" style="display: inline-flex; align-items: center; gap: 8px; min-height: 52px; box-sizing: border-box; padding: 14px 24px; border-radius: 12px; background: #0D6B4B; color: #FFFFFF; text-decoration: none; font-weight: 600; font-size: 16px">Book a demo
+<a href="#demo" style="display: inline-flex; align-items: center; gap: 10px; min-height: 54px; box-sizing: border-box; padding: 14px 26px; border-radius: 999px; background: #5CF0AE; color: #03140C; text-decoration: none; font-weight: 600; font-size: 16px; box-shadow: 0 12px 40px -12px color-mix(in oklab, #5CF0AE 70%, transparent)">Book a demo
 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
 </a>
-<a href="#how" style="display: inline-flex; align-items: center; min-height: 52px; box-sizing: border-box; padding: 14px 24px; border-radius: 12px; background: #FFFFFF; border: 1px solid #D6D6D0; color: #151714; text-decoration: none; font-weight: 600; font-size: 16px">See how it works</a>
+<a href="#listen" style="display: inline-flex; align-items: center; gap: 10px; min-height: 54px; box-sizing: border-box; padding: 14px 24px; border-radius: 999px; border: 1px solid #2A3230; background: rgba(18,23,22,0.6); color: #EEF3F0; text-decoration: none; font-weight: 600; font-size: 16px">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"></path></svg>
+Hear a real call</a>
 </div>
 </div>
 
-<div style="flex: 1 1 400px; min-width: 0; position: relative">
-<div class="dots" aria-hidden="true" style="position: absolute; top: -28px; right: -28px; bottom: -28px; left: 40px; border-radius: 28px"></div>
-<div style="position: relative; background: #FFFFFF; border: 1px solid #E4E4DF; border-radius: 20px; box-shadow: 0 1px 2px rgba(21,23,20,0.04), 0 28px 56px -28px rgba(21,23,20,0.22); overflow: hidden">
-<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 20px; border-bottom: 1px solid #EEEEEA">
+<div style="flex: 1 1 420px; min-width: 0; max-width: 540px; margin-left: auto">
+<div style="background: rgba(15,20,19,0.86); border: 1px solid #232B29; border-radius: 28px; box-shadow: 0 40px 120px -40px color-mix(in oklab, #5CF0AE 40%, transparent), inset 0 1px 0 rgba(238,243,240,0.05); overflow: hidden; backdrop-filter: blur(10px)">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 22px; border-bottom: 1px solid #1F2624">
 <div style="display: flex; align-items: center; gap: 12px">
-<div style="width: 40px; height: 40px; border-radius: 50%; background: #F0F0EC; display: flex; align-items: center; justify-content: center">
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"></path></svg>
-</div>
+<span class="pulse" style="width: 10px; height: 10px; border-radius: 50%; background: #5CF0AE"></span>
 <div style="display: flex; flex-direction: column; gap: 2px">
-<span style="font-size: 15px; font-weight: 600">Example call</span>
-<span style="font-size: 13px; color: #62675F">Dental clinic · Tuesday, 8:47 p.m.</span>
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; color: #EEF3F0">LIVE CALL</span>
+<span style="font-size: 13px; color: #7C8782">Example · Smile Dental · Tue 20:47</span>
 </div>
 </div>
-<span style="display: flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 999px; background: #F0F0EC; font-size: 12px; font-weight: 600; color: #151714">
-<span style="width: 7px; height: 7px; border-radius: 50%; background: #0D6B4B"></span>
-<span>After hours</span>
-</span>
+<span style="padding: 5px 10px; border-radius: 999px; border: 1px solid #2E3835; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.08em; color: #C9D1CD">AFTER HOURS</span>
 </div>
 
-<div style="padding: 22px 20px; display: flex; flex-direction: column; gap: 14px">
-<div style="align-self: flex-start; max-width: 82%; display: flex; flex-direction: column; gap: 6px">
-<span style="font-size: 12px; font-weight: 500; color: #62675F">Caller</span>
-<p style="margin: 0; padding: 12px 14px; border-radius: 14px 14px 14px 4px; background: #F2F2EE; font-size: 15px; line-height: 1.5">Hi, my tooth has been hurting since yesterday. Can I come in this week?</p>
+<div class="wave on" aria-hidden="true" style="display: flex; align-items: center; justify-content: center; gap: 4px; height: 64px; padding: 0 22px; border-bottom: 1px solid #1F2624">
+
+<span class="bar" style="height: 20px; animation-delay: 0.00s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 26px; animation-delay: 0.08s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 13px; animation-delay: 0.17s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 8px; animation-delay: 0.25s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 24px; animation-delay: 0.33s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 39px; animation-delay: 0.42s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 25px; animation-delay: 0.50s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 23px; animation-delay: 0.58s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 40px; animation-delay: 0.66s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 28px; animation-delay: 0.75s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 8px; animation-delay: 0.83s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 9px; animation-delay: 0.91s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 23px; animation-delay: 1.00s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 20px; animation-delay: 1.08s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 23px; animation-delay: 0.01s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 45px; animation-delay: 0.10s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 36px; animation-delay: 0.18s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 8px; animation-delay: 0.26s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 23px; animation-delay: 0.34s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 13px; animation-delay: 0.43s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 12px; animation-delay: 0.51s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 17px; animation-delay: 0.59s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 39px; animation-delay: 0.68s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 37px; animation-delay: 0.76s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 8px; animation-delay: 0.84s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 34px; animation-delay: 0.93s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 32px; animation-delay: 1.01s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 13px; animation-delay: 1.09s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 9px; animation-delay: 0.02s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 23px; animation-delay: 0.11s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 29px; animation-delay: 0.19s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 9px; animation-delay: 0.27s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 38px; animation-delay: 0.36s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 43px; animation-delay: 0.44s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 20px; animation-delay: 0.52s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 17px; animation-delay: 0.61s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 13px; animation-delay: 0.69s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 15px; animation-delay: 0.77s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 9px; animation-delay: 0.85s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 33px; animation-delay: 0.94s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 44px; animation-delay: 1.02s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 23px; animation-delay: 1.10s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 24px; animation-delay: 0.04s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 32px; animation-delay: 0.12s; background: #5CF0AE"></span>
+
 </div>
-<div style="align-self: flex-end; max-width: 82%; display: flex; flex-direction: column; align-items: flex-end; gap: 6px">
-<span style="font-size: 12px; font-weight: 500; color: #62675F">Kinitomou</span>
-<p style="margin: 0; padding: 12px 14px; border-radius: 14px 14px 4px 14px; background: #151714; color: #FFFFFF; font-size: 15px; line-height: 1.5">Sorry to hear that. I can fit you in Thursday at 10:30 or Friday at 4:00. Which works better?</p>
+
+<div id="hero-msgs" aria-live="polite" style="height: 360px; box-sizing: border-box; padding: 20px 22px; display: flex; flex-direction: column; justify-content: flex-end; gap: 14px; overflow: hidden">
+
+
 </div>
-<div style="align-self: flex-start; max-width: 82%; display: flex; flex-direction: column; gap: 6px">
-<span style="font-size: 12px; font-weight: 500; color: #62675F">Caller</span>
-<p style="margin: 0; padding: 12px 14px; border-radius: 14px 14px 14px 4px; background: #F2F2EE; font-size: 15px; line-height: 1.5">Thursday, please.</p>
+
+<div id="hero-status"></div>
+
 </div>
-<div style="align-self: flex-end; max-width: 82%; display: flex; flex-direction: column; align-items: flex-end; gap: 6px">
-<span style="font-size: 12px; font-weight: 500; color: #62675F">Kinitomou</span>
-<p style="margin: 0; padding: 12px 14px; border-radius: 14px 14px 4px 14px; background: #151714; color: #FFFFFF; font-size: 15px; line-height: 1.5">You're all set for Thursday at 10:30. I'll text you a confirmation now.</p>
+</div>
+</div>
+</section>
+
+<section aria-label="Calls Kinitomou handles" style="border-top: 1px solid #1A201E; border-bottom: 1px solid #1A201E; padding: 26px 0; overflow: hidden; background: #0B0E0D">
+<div class="marquee" aria-hidden="true">
+
+<div style="display: flex; align-items: center; gap: 28px; padding-right: 28px; white-space: nowrap">
+<span style="font-size: 26px; font-weight: 500; letter-spacing: -0.02em; color: #8A958F">Appointments</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="#5CF0AE" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"></path></svg>
+</div>
+
+<div style="display: flex; align-items: center; gap: 28px; padding-right: 28px; white-space: nowrap">
+<span style="font-size: 26px; font-weight: 500; letter-spacing: -0.02em; color: #8A958F">Rescheduling</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="#5CF0AE" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"></path></svg>
+</div>
+
+<div style="display: flex; align-items: center; gap: 28px; padding-right: 28px; white-space: nowrap">
+<span style="font-size: 26px; font-weight: 500; letter-spacing: -0.02em; color: #8A958F">Cancellations</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="#5CF0AE" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"></path></svg>
+</div>
+
+<div style="display: flex; align-items: center; gap: 28px; padding-right: 28px; white-space: nowrap">
+<span style="font-size: 26px; font-weight: 500; letter-spacing: -0.02em; color: #8A958F">Opening hours</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="#5CF0AE" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"></path></svg>
+</div>
+
+<div style="display: flex; align-items: center; gap: 28px; padding-right: 28px; white-space: nowrap">
+<span style="font-size: 26px; font-weight: 500; letter-spacing: -0.02em; color: #8A958F">Prices</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="#5CF0AE" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"></path></svg>
+</div>
+
+<div style="display: flex; align-items: center; gap: 28px; padding-right: 28px; white-space: nowrap">
+<span style="font-size: 26px; font-weight: 500; letter-spacing: -0.02em; color: #8A958F">Messages</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="#5CF0AE" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"></path></svg>
+</div>
+
+<div style="display: flex; align-items: center; gap: 28px; padding-right: 28px; white-space: nowrap">
+<span style="font-size: 26px; font-weight: 500; letter-spacing: -0.02em; color: #8A958F">Urgent transfers</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="#5CF0AE" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"></path></svg>
+</div>
+
+<div style="display: flex; align-items: center; gap: 28px; padding-right: 28px; white-space: nowrap">
+<span style="font-size: 26px; font-weight: 500; letter-spacing: -0.02em; color: #8A958F">Spam screening</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="#5CF0AE" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"></path></svg>
+</div>
+
+<div style="display: flex; align-items: center; gap: 28px; padding-right: 28px; white-space: nowrap">
+<span style="font-size: 26px; font-weight: 500; letter-spacing: -0.02em; color: #8A958F">Text confirmations</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="#5CF0AE" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"></path></svg>
+</div>
+
+<div style="display: flex; align-items: center; gap: 28px; padding-right: 28px; white-space: nowrap">
+<span style="font-size: 26px; font-weight: 500; letter-spacing: -0.02em; color: #8A958F">Appointments</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="#5CF0AE" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"></path></svg>
+</div>
+
+<div style="display: flex; align-items: center; gap: 28px; padding-right: 28px; white-space: nowrap">
+<span style="font-size: 26px; font-weight: 500; letter-spacing: -0.02em; color: #8A958F">Rescheduling</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="#5CF0AE" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"></path></svg>
+</div>
+
+<div style="display: flex; align-items: center; gap: 28px; padding-right: 28px; white-space: nowrap">
+<span style="font-size: 26px; font-weight: 500; letter-spacing: -0.02em; color: #8A958F">Cancellations</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="#5CF0AE" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"></path></svg>
+</div>
+
+<div style="display: flex; align-items: center; gap: 28px; padding-right: 28px; white-space: nowrap">
+<span style="font-size: 26px; font-weight: 500; letter-spacing: -0.02em; color: #8A958F">Opening hours</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="#5CF0AE" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"></path></svg>
+</div>
+
+<div style="display: flex; align-items: center; gap: 28px; padding-right: 28px; white-space: nowrap">
+<span style="font-size: 26px; font-weight: 500; letter-spacing: -0.02em; color: #8A958F">Prices</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="#5CF0AE" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"></path></svg>
+</div>
+
+<div style="display: flex; align-items: center; gap: 28px; padding-right: 28px; white-space: nowrap">
+<span style="font-size: 26px; font-weight: 500; letter-spacing: -0.02em; color: #8A958F">Messages</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="#5CF0AE" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"></path></svg>
+</div>
+
+<div style="display: flex; align-items: center; gap: 28px; padding-right: 28px; white-space: nowrap">
+<span style="font-size: 26px; font-weight: 500; letter-spacing: -0.02em; color: #8A958F">Urgent transfers</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="#5CF0AE" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"></path></svg>
+</div>
+
+<div style="display: flex; align-items: center; gap: 28px; padding-right: 28px; white-space: nowrap">
+<span style="font-size: 26px; font-weight: 500; letter-spacing: -0.02em; color: #8A958F">Spam screening</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="#5CF0AE" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"></path></svg>
+</div>
+
+<div style="display: flex; align-items: center; gap: 28px; padding-right: 28px; white-space: nowrap">
+<span style="font-size: 26px; font-weight: 500; letter-spacing: -0.02em; color: #8A958F">Text confirmations</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="#5CF0AE" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"></path></svg>
+</div>
+
+</div>
+</section>
+
+<section id="why" style="max-width: 1240px; margin: 0 auto; padding: 140px 24px 120px; display: flex; flex-direction: column; gap: 72px">
+<div class="reveal" style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 40px 64px">
+<div style="flex: 2 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.14em; color: #5CF0AE">01 — WHY IT MATTERS</span>
+<h2 style="margin: 0; font-size: clamp(38px, 5.2vw, 72px); line-height: 1.0; letter-spacing: -0.045em; font-weight: 600">Every missed call is a customer <span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: -0.02em; color: #5CF0AE">calling someone else.</span></h2>
+</div>
+<p style="flex: 1 1 300px; margin: 0; font-size: 18px; line-height: 1.6; color: #A3ADA8">You're with a client, out on a job or closed for the night. A caller who reaches voicemail often hangs up and tries the next business on the list.</p>
+</div>
+
+<div class="bento">
+<div class="span2 reveal" style="position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; gap: 40px; min-height: 340px; box-sizing: border-box; padding: 36px; border: 1px solid #1F2624; border-radius: 28px; background: #0F1413">
+<div style="display: flex; flex-direction: column; gap: 12px; max-width: 460px">
+<h3 style="margin: 0; font-size: 30px; line-height: 1.1; letter-spacing: -0.035em; font-weight: 600">Answers at 3 p.m. <span style="color: #7C8782">and at 3 a.m.</span></h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #A3ADA8">Evenings, weekends and holidays included. Kinitomou picks up on the first ring.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div style="position: relative; height: 56px; border-radius: 14px; background: #141A18; border: 1px solid #1F2624; overflow: hidden">
+<div style="position: absolute; top: 0; bottom: 0; left: 0; width: 33.3%; background: repeating-linear-gradient(135deg, rgba(238,243,240,0.035) 0 6px, transparent 6px 12px)"></div>
+<div style="position: absolute; top: 0; bottom: 0; right: 0; width: 16.7%; background: repeating-linear-gradient(135deg, rgba(238,243,240,0.035) 0 6px, transparent 6px 12px)"></div>
+
+<span style="position: absolute; top: 50%; left: 2.5%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #5CF0AE; box-shadow: 0 0 12px #5CF0AE"></span>
+
+<span style="position: absolute; top: 50%; left: 6%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #5CF0AE; box-shadow: 0 0 12px #5CF0AE"></span>
+
+<span style="position: absolute; top: 50%; left: 11%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #5CF0AE; box-shadow: 0 0 12px #5CF0AE"></span>
+
+<span style="position: absolute; top: 50%; left: 29%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #5CF0AE; box-shadow: 0 0 12px #5CF0AE"></span>
+
+<span style="position: absolute; top: 50%; left: 36%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #A3ADA8; box-shadow: none"></span>
+
+<span style="position: absolute; top: 50%; left: 40%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #A3ADA8; box-shadow: none"></span>
+
+<span style="position: absolute; top: 50%; left: 44%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #A3ADA8; box-shadow: none"></span>
+
+<span style="position: absolute; top: 50%; left: 49%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #A3ADA8; box-shadow: none"></span>
+
+<span style="position: absolute; top: 50%; left: 53%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #A3ADA8; box-shadow: none"></span>
+
+<span style="position: absolute; top: 50%; left: 57%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #A3ADA8; box-shadow: none"></span>
+
+<span style="position: absolute; top: 50%; left: 62%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #A3ADA8; box-shadow: none"></span>
+
+<span style="position: absolute; top: 50%; left: 68%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #A3ADA8; box-shadow: none"></span>
+
+<span style="position: absolute; top: 50%; left: 74%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #A3ADA8; box-shadow: none"></span>
+
+<span style="position: absolute; top: 50%; left: 79%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #A3ADA8; box-shadow: none"></span>
+
+<span style="position: absolute; top: 50%; left: 85%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #5CF0AE; box-shadow: 0 0 12px #5CF0AE"></span>
+
+<span style="position: absolute; top: 50%; left: 89%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #5CF0AE; box-shadow: 0 0 12px #5CF0AE"></span>
+
+<span style="position: absolute; top: 50%; left: 93%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #5CF0AE; box-shadow: 0 0 12px #5CF0AE"></span>
+
+<span style="position: absolute; top: 50%; left: 97%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #5CF0AE; box-shadow: 0 0 12px #5CF0AE"></span>
+
+</div>
+<div style="display: flex; justify-content: space-between; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; color: #7C8782">
+<span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 20px; font-size: 13px; color: #A3ADA8">
+<span style="display: flex; align-items: center; gap: 8px"><span style="width: 8px; height: 8px; border-radius: 50%; background: #5CF0AE"></span>Answered after hours</span>
+<span style="display: flex; align-items: center; gap: 8px"><span style="width: 8px; height: 8px; border-radius: 50%; background: #A3ADA8"></span>Answered in business hours</span>
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.08em; color: #7C8782; margin-left: auto">ILLUSTRATION</span>
+</div>
 </div>
 </div>
 
-<div style="display: flex; align-items: center; gap: 14px; padding: 16px 20px; border-top: 1px solid #EEEEEA; background: #FAFAF8">
-<div style="flex: 0 0 auto; width: 36px; height: 36px; border-radius: 50%; background: #0D6B4B; display: flex; align-items: center; justify-content: center">
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+<div class="reveal" style="display: flex; flex-direction: column; justify-content: space-between; gap: 32px; min-height: 340px; box-sizing: border-box; padding: 36px; border: 1px solid #1F2624; border-radius: 28px; background: #0F1413">
+<div class="wave on" aria-hidden="true" style="display: flex; align-items: center; gap: 4px; height: 48px">
+
+<span class="bar" style="height: 36px; animation-delay: 0.00s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 12px; animation-delay: 0.08s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 18px; animation-delay: 0.17s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 9px; animation-delay: 0.25s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 15px; animation-delay: 0.33s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 15px; animation-delay: 0.42s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 38px; animation-delay: 0.50s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 39px; animation-delay: 0.58s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 12px; animation-delay: 0.66s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 29px; animation-delay: 0.75s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 28px; animation-delay: 0.83s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 12px; animation-delay: 0.91s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 10px; animation-delay: 1.00s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 25px; animation-delay: 1.08s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 32px; animation-delay: 0.01s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 12px; animation-delay: 0.10s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 34px; animation-delay: 0.18s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 40px; animation-delay: 0.26s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 21px; animation-delay: 0.34s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 13px; animation-delay: 0.43s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 9px; animation-delay: 0.51s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 18px; animation-delay: 0.59s; background: #5CF0AE"></span>
+
 </div>
-<div style="display: flex; flex-direction: column; gap: 2px">
-<span style="font-size: 14px; font-weight: 600">Appointment booked · Thu, 10:30</span>
-<span style="font-size: 13px; color: #62675F">Added to the clinic's calendar. Summary sent to the team.</span>
+<p style="margin: 0; font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 28px; line-height: 1.2; color: #EEF3F0">“Good evening, Smile Dental. How can I help?”</p>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<h3 style="margin: 0; font-size: 22px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 600">Sounds like your front desk</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #A3ADA8">A warm, natural voice that uses your business name and knows your services, hours and prices.</p>
+</div>
+</div>
+
+<div class="reveal" style="display: flex; flex-direction: column; justify-content: space-between; gap: 32px; min-height: 340px; box-sizing: border-box; padding: 36px; border: 1px solid #1F2624; border-radius: 28px; background: #0F1413">
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 18px; border-radius: 18px; background: #151B19; border: 1px solid #252E2B; box-shadow: 0 20px 40px -20px rgba(0,0,0,0.6)">
+<div style="display: flex; justify-content: space-between; gap: 12px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.08em">
+<span style="color: #5CF0AE">NEW BOOKING</span><span style="color: #7C8782">20:49</span>
+</div>
+<span style="font-size: 16px; font-weight: 600">Ana M. · Thursday 10:30</span>
+<span style="font-size: 14px; line-height: 1.5; color: #A3ADA8">Toothache since yesterday, first visit. Confirmation sent by text.</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<h3 style="margin: 0; font-size: 22px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 600">Reports back after every call</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #A3ADA8">A short summary lands with you: who called, what they needed and what happens next.</p>
+</div>
+</div>
+
+<div class="span2 reveal" style="display: flex; flex-wrap: wrap; align-items: center; gap: 40px; min-height: 340px; box-sizing: border-box; padding: 36px; border: 1px solid #1F2624; border-radius: 28px; background: #0F1413">
+<div style="flex: 1 1 280px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+<h3 style="margin: 0; font-size: 30px; line-height: 1.1; letter-spacing: -0.035em; font-weight: 600">Knows when to <span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; color: #5CF0AE">hand over.</span></h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #A3ADA8">Routine calls are handled from start to finish. Urgent ones, or callers who ask for a person, go straight to you.</p>
+</div>
+<div style="flex: 1.2 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+
+<div style="display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 14px; background: #141A18; border: 1px solid #1F2624">
+<span style="flex: 0 0 auto; min-width: 92px; padding: 5px 10px; border-radius: 999px; border: 1px solid #2E3835; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.08em; text-align: center; color: #C9D1CD">BOOKING</span>
+<span aria-hidden="true" style="flex: 1 1 16px; min-width: 12px; height: 1px; background: linear-gradient(90deg, #2A3230, #5CF0AE)"></span>
+<span style="flex: 0 1 auto; min-width: 0; text-align: right; font-size: 14px; line-height: 1.35; font-weight: 500; color: #EEF3F0">Handled by Kinitomou</span>
+</div>
+
+<div style="display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 14px; background: #141A18; border: 1px solid #1F2624">
+<span style="flex: 0 0 auto; min-width: 92px; padding: 5px 10px; border-radius: 999px; border: 1px solid #2E3835; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.08em; text-align: center; color: #C9D1CD">QUESTION</span>
+<span aria-hidden="true" style="flex: 1 1 16px; min-width: 12px; height: 1px; background: linear-gradient(90deg, #2A3230, #5CF0AE)"></span>
+<span style="flex: 0 1 auto; min-width: 0; text-align: right; font-size: 14px; line-height: 1.35; font-weight: 500; color: #EEF3F0">Handled by Kinitomou</span>
+</div>
+
+<div style="display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 14px; background: #141A18; border: 1px solid #1F2624">
+<span style="flex: 0 0 auto; min-width: 92px; padding: 5px 10px; border-radius: 999px; border: 1px solid #5A4520; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.08em; text-align: center; color: #F5B652">URGENT</span>
+<span aria-hidden="true" style="flex: 1 1 16px; min-width: 12px; height: 1px; background: linear-gradient(90deg, #2A3230, #F5B652)"></span>
+<span style="flex: 0 1 auto; min-width: 0; text-align: right; font-size: 14px; line-height: 1.35; font-weight: 500; color: #EEF3F0">Put through to you</span>
+</div>
+
+</div>
+</div>
+</div>
+</section>
+
+<section id="industries" style="background: #0C100F; border-top: 1px solid #1A201E; border-bottom: 1px solid #1A201E">
+<div style="max-width: 1240px; margin: 0 auto; padding: 120px 24px; display: flex; flex-direction: column; gap: 48px">
+<div class="reveal" style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px 64px">
+<div style="flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.14em; color: #5CF0AE">02 — INDUSTRIES</span>
+<h2 style="margin: 0; font-size: clamp(38px, 5.2vw, 72px); line-height: 1.0; letter-spacing: -0.045em; font-weight: 600">Speaks your <span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: -0.02em; color: #5CF0AE">industry.</span></h2>
+</div>
+<p style="flex: 1 1 300px; margin: 0; font-size: 18px; line-height: 1.6; color: #A3ADA8">Pick your business and see how Kinitomou handles a typical call.</p>
+</div>
+
+<div id="ind-tabs" role="group" aria-label="Choose an industry" style="display: flex; flex-wrap: wrap; gap: 10px">
+
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 28px; padding: 40px; border: 1px solid #1F2624; border-radius: 28px; background: #0F1413">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<h3 style="margin: 0; font-size: 34px; line-height: 1.1; letter-spacing: -0.035em; font-weight: 600"><span id="ind-title"></span></h3>
+<p style="margin: 0; font-size: 17px; line-height: 1.6; color: #A3ADA8"><span id="ind-blurb"></span></p>
+</div>
+<div style="display: flex; flex-direction: column; border-top: 1px solid #1F2624">
+<div id="ind-tasks" style="display: contents"></div>
+</div>
+</div>
+<div style="flex: 1.15 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 14px; justify-content: center; padding: 40px; border: 1px solid #1F2624; border-radius: 28px; background: radial-gradient(120% 90% at 100% 0%, color-mix(in oklab, #5CF0AE 10%, #0F1413), #0F1413 60%)">
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.1em; color: #7C8782">EXAMPLE CALL</span>
+<div id="ind-convo" style="display: flex; flex-direction: column; gap: 14px"></div>
+<div style="align-self: flex-start; display: flex; align-items: center; gap: 10px; margin-top: 8px; padding: 8px 14px; border-radius: 999px; background: #141A18; border: 1px solid #252E2B; font-size: 13px; color: #C9D1CD">
+<span style="width: 8px; height: 8px; border-radius: 50%; background: #5CF0AE" id="ind-dot"></span><span id="ind-outcome"></span>
 </div>
 </div>
 </div>
 </div>
 </section>
 
-<section style="background: #FFFFFF; border-top: 1px solid #E4E4DF; border-bottom: 1px solid #E4E4DF">
-<div style="max-width: 1160px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 56px">
-<div style="max-width: 640px; display: flex; flex-direction: column; gap: 16px">
-<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #0D6B4B">Why Kinitomou</span>
-<h2 style="margin: 0; font-family: 'Inter Tight', Inter, system-ui, sans-serif; font-size: clamp(32px, 4vw, 46px); line-height: 1.08; letter-spacing: -0.03em; font-weight: 600">Missed calls are missed customers.</h2>
-<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #575C57">You're with a client, out on a job or closed for the night, and the phone rings. A caller who reaches voicemail often hangs up and tries the next business on the list.</p>
+<section id="listen" style="position: relative; overflow: hidden; padding: 140px 24px">
+<div aria-hidden="true" style="position: absolute; top: 50%; left: 50%; width: 1100px; height: 700px; margin: -350px 0 0 -550px; background: radial-gradient(closest-side, color-mix(in oklab, #5CF0AE 14%, transparent), transparent); pointer-events: none"></div>
+<div style="position: relative; max-width: 960px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 48px; text-align: center">
+<div class="reveal" style="display: flex; flex-direction: column; align-items: center; gap: 24px">
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.14em; color: #5CF0AE">03 — LISTEN</span>
+<h2 style="margin: 0; font-size: clamp(38px, 5.2vw, 72px); line-height: 1.0; letter-spacing: -0.045em; font-weight: 600">Don't take our word for it. <span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: -0.02em; color: #5CF0AE">Listen.</span></h2>
 </div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 24px">
-<div style="padding: 28px; border: 1px solid #E4E4DF; border-radius: 16px; background: #F7F7F4; display: flex; flex-direction: column; gap: 14px">
-<div style="width: 44px; height: 44px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E4E4DF; display: flex; align-items: center; justify-content: center">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+<div class="reveal" style="width: 100%; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px; padding: 28px; border: 1px solid #232B29; border-radius: 28px; background: rgba(15,20,19,0.88); box-shadow: 0 40px 120px -50px color-mix(in oklab, #5CF0AE 45%, transparent)">
+<div style="display: flex; align-items: center; gap: 22px">
+<button id="play-btn" type="button" aria-label="Play sample call" style="flex: 0 0 auto; width: 72px; height: 72px; border-radius: 50%; border: 0; background: #5CF0AE; color: #03140C; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 0 0 8px color-mix(in oklab, #5CF0AE 14%, transparent)">
+<span id="play-icon" style="display: flex"></span>
+
+</button>
+<div id="listen-wave" class="wave" aria-hidden="true" style="flex: 1 1 auto; min-width: 0; display: flex; align-items: center; justify-content: space-between; gap: 3px; height: 72px; overflow: hidden">
+
+<span class="bar" style="height: 41px; animation-delay: 0.00s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 47px; animation-delay: 0.08s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 12px; animation-delay: 0.17s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 50px; animation-delay: 0.25s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 55px; animation-delay: 0.33s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 25px; animation-delay: 0.42s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 16px; animation-delay: 0.50s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 15px; animation-delay: 0.58s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 29px; animation-delay: 0.66s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 11px; animation-delay: 0.75s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 49px; animation-delay: 0.83s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 63px; animation-delay: 0.91s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 33px; animation-delay: 1.00s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 27px; animation-delay: 1.08s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 33px; animation-delay: 0.01s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 14px; animation-delay: 0.10s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 10px; animation-delay: 0.18s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 35px; animation-delay: 0.26s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 55px; animation-delay: 0.34s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 33px; animation-delay: 0.43s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 33px; animation-delay: 0.51s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 55px; animation-delay: 0.59s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 35px; animation-delay: 0.68s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 10px; animation-delay: 0.76s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 14px; animation-delay: 0.84s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 34px; animation-delay: 0.93s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 27px; animation-delay: 1.01s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 33px; animation-delay: 1.09s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 63px; animation-delay: 0.02s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 49px; animation-delay: 0.11s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 11px; animation-delay: 0.19s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 29px; animation-delay: 0.27s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 15px; animation-delay: 0.36s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 16px; animation-delay: 0.44s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 25px; animation-delay: 0.52s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 55px; animation-delay: 0.61s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 50px; animation-delay: 0.69s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 12px; animation-delay: 0.77s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 47px; animation-delay: 0.85s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 41px; animation-delay: 0.94s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 16px; animation-delay: 1.02s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 13px; animation-delay: 1.10s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 34px; animation-delay: 0.04s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 40px; animation-delay: 0.12s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 13px; animation-delay: 0.20s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 54px; animation-delay: 0.29s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 58px; animation-delay: 0.37s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 25px; animation-delay: 0.45s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 22px; animation-delay: 0.53s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 14px; animation-delay: 0.62s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 21px; animation-delay: 0.70s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 13px; animation-delay: 0.78s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 48px; animation-delay: 0.87s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 61px; animation-delay: 0.95s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 29px; animation-delay: 1.03s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 33px; animation-delay: 1.12s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 42px; animation-delay: 0.05s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 20px; animation-delay: 0.13s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 11px; animation-delay: 0.21s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 31px; animation-delay: 0.30s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 48px; animation-delay: 0.38s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 27px; animation-delay: 0.46s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 38px; animation-delay: 0.55s; background: #5CF0AE"></span>
+
+<span class="bar" style="height: 60px; animation-delay: 0.63s; background: #5CF0AE"></span>
+
 </div>
-<h3 style="margin: 0; font-size: 20px; line-height: 1.3; font-weight: 600; letter-spacing: -0.01em">Always picks up</h3>
-<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #575C57">Answers on the first ring at any hour, including evenings, weekends and holidays.</p>
 </div>
-<div style="padding: 28px; border: 1px solid #E4E4DF; border-radius: 16px; background: #F7F7F4; display: flex; flex-direction: column; gap: 14px">
-<div style="width: 44px; height: 44px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E4E4DF; display: flex; align-items: center; justify-content: center">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.06em; color: #A3ADA8; text-align: left">
+<span>SAMPLE CALL · DENTAL CLINIC · AFTER HOURS</span>
+<span>[LENGTH]</span>
 </div>
-<h3 style="margin: 0; font-size: 20px; line-height: 1.3; font-weight: 600; letter-spacing: -0.01em">Sounds like your front desk</h3>
-<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #575C57">A warm, natural voice that greets callers in your business's name and knows your services, hours and prices.</p>
 </div>
-<div style="padding: 28px; border: 1px solid #E4E4DF; border-radius: 16px; background: #F7F7F4; display: flex; flex-direction: column; gap: 14px">
-<div style="width: 44px; height: 44px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E4E4DF; display: flex; align-items: center; justify-content: center">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><path d="M8 9h8M8 13h5"></path></svg>
+<p style="margin: 0; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.06em; color: #7C8782">[ADD YOUR SAMPLE CALL RECORDING]</p>
 </div>
-<h3 style="margin: 0; font-size: 20px; line-height: 1.3; font-weight: 600; letter-spacing: -0.01em">Keeps you in the loop</h3>
-<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #575C57">After every call you get a short summary: who called, what they needed and what happens next.</p>
+</section>
+
+<section id="how" style="border-top: 1px solid #1A201E">
+<div style="max-width: 1240px; margin: 0 auto; padding: 120px 24px; display: flex; flex-direction: column; gap: 72px">
+<div class="reveal" style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px 64px">
+<div style="flex: 1 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.14em; color: #5CF0AE">04 — HOW IT WORKS</span>
+<h2 style="margin: 0; font-size: clamp(38px, 5.2vw, 72px); line-height: 1.0; letter-spacing: -0.045em; font-weight: 600">Set it up once. Then it just <span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: -0.02em; color: #5CF0AE">answers.</span></h2>
+</div>
+<p style="flex: 1 1 300px; margin: 0; font-size: 18px; line-height: 1.6; color: #A3ADA8">No new hardware and no new number. Your customers keep calling the one they already know.</p>
+</div>
+<div class="reveal" style="position: relative">
+<div aria-hidden="true" style="position: absolute; top: 9px; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, #5CF0AE, #2A3230 70%)"></div>
+<div style="position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 48px">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<span style="width: 18px; height: 18px; border-radius: 50%; background: #090B0B; border: 2px solid #5CF0AE; box-sizing: border-box; box-shadow: 0 0 20px color-mix(in oklab, #5CF0AE 60%, transparent)"></span>
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.12em; color: #7C8782">STEP 01</span>
+<h3 style="margin: 0; font-size: 26px; line-height: 1.15; letter-spacing: -0.03em; font-weight: 600">Tell us about your business</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #A3ADA8">Share your services, hours, prices and the questions customers ask most. Kinitomou learns how you want each call handled.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 18px">
+<span style="width: 18px; height: 18px; border-radius: 50%; background: #090B0B; border: 2px solid #5CF0AE; box-sizing: border-box"></span>
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.12em; color: #7C8782">STEP 02</span>
+<h3 style="margin: 0; font-size: 26px; line-height: 1.15; letter-spacing: -0.03em; font-weight: 600">Forward your calls</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #A3ADA8">Point your existing number to Kinitomou, all the time or only when you can't pick up.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 18px">
+<span style="width: 18px; height: 18px; border-radius: 50%; background: #5CF0AE; box-shadow: 0 0 24px color-mix(in oklab, #5CF0AE 70%, transparent)"></span>
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.12em; color: #7C8782">STEP 03</span>
+<h3 style="margin: 0; font-size: 26px; line-height: 1.15; letter-spacing: -0.03em; font-weight: 600">Go live</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #A3ADA8">From the next call on, Kinitomou answers as your business and you get back to your work.</p>
+</div>
 </div>
 </div>
 </div>
 </section>
 
-<section id="handles" style="max-width: 1160px; margin: 0 auto; padding: 104px 24px; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 56px">
-<div style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
-<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #0D6B4B">What it handles</span>
-<h2 style="margin: 0; font-family: 'Inter Tight', Inter, system-ui, sans-serif; font-size: clamp(32px, 4vw, 46px); line-height: 1.08; letter-spacing: -0.03em; font-weight: 600">The calls that fill your day.</h2>
-<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #575C57">Kinitomou handles routine calls from start to finish, and knows when a caller needs you instead.</p>
+<section id="faq" style="border-top: 1px solid #1A201E">
+<div style="max-width: 1240px; margin: 0 auto; padding: 120px 24px; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 56px 80px">
+<div class="reveal" style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.14em; color: #5CF0AE">05 — FAQ</span>
+<h2 style="margin: 0; font-size: clamp(38px, 5.2vw, 72px); line-height: 1.0; letter-spacing: -0.045em; font-weight: 600">Good <span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: -0.02em; color: #5CF0AE">questions.</span></h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #A3ADA8">Don't see yours here? Ask us on a demo call.</p>
 </div>
-<div style="flex: 1.5 1 480px; min-width: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); gap: 12px">
-<div style="display: flex; align-items: center; gap: 14px; padding: 18px 20px; border: 1px solid #E4E4DF; border-radius: 14px; background: #FFFFFF">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
-<span style="font-size: 16px; line-height: 1.4; font-weight: 500">Booking, rescheduling and cancellations</span>
-</div>
-<div style="display: flex; align-items: center; gap: 14px; padding: 18px 20px; border: 1px solid #E4E4DF; border-radius: 14px; background: #FFFFFF">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
-<span style="font-size: 16px; line-height: 1.4; font-weight: 500">Questions about hours, prices and location</span>
-</div>
-<div style="display: flex; align-items: center; gap: 14px; padding: 18px 20px; border: 1px solid #E4E4DF; border-radius: 14px; background: #FFFFFF">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
-<span style="font-size: 16px; line-height: 1.4; font-weight: 500">Taking clear, detailed messages</span>
-</div>
-<div style="display: flex; align-items: center; gap: 14px; padding: 18px 20px; border: 1px solid #E4E4DF; border-radius: 14px; background: #FFFFFF">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
-<span style="font-size: 16px; line-height: 1.4; font-weight: 500">Passing urgent calls straight to you</span>
-</div>
-<div style="display: flex; align-items: center; gap: 14px; padding: 18px 20px; border: 1px solid #E4E4DF; border-radius: 14px; background: #FFFFFF">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
-<span style="font-size: 16px; line-height: 1.4; font-weight: 500">Screening out spam and sales calls</span>
-</div>
-<div style="display: flex; align-items: center; gap: 14px; padding: 18px 20px; border: 1px solid #E4E4DF; border-radius: 14px; background: #FFFFFF">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
-<span style="font-size: 16px; line-height: 1.4; font-weight: 500">Texting confirmations and links to callers</span>
+<div style="flex: 1.6 1 540px; min-width: 0; display: flex; flex-direction: column; border-top: 1px solid #1F2624">
+<details open="" style="border-bottom: 1px solid #1F2624">
+<summary style="list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 44px; padding: 24px 0; font-size: 19px; line-height: 1.4; font-weight: 500">Will callers know they're talking to an AI?
+<svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5CF0AE" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M12 5v14M5 12h14"></path></svg>
+</summary>
+<p style="margin: 0 0 24px; max-width: 620px; font-size: 16px; line-height: 1.65; color: #A3ADA8">Yes. Kinitomou speaks in a natural, friendly voice and is upfront about being an AI assistant, so callers always know who they're talking to.</p>
+</details>
+<details style="border-bottom: 1px solid #1F2624">
+<summary style="list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 44px; padding: 24px 0; font-size: 19px; line-height: 1.4; font-weight: 500">What if a caller wants to speak to a real person?
+<svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5CF0AE" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M12 5v14M5 12h14"></path></svg>
+</summary>
+<p style="margin: 0 0 24px; max-width: 620px; font-size: 16px; line-height: 1.65; color: #A3ADA8">Kinitomou transfers the call to you or your team, or takes a detailed message if nobody is available. You decide which calls get passed on.</p>
+</details>
+<details style="border-bottom: 1px solid #1F2624">
+<summary style="list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 44px; padding: 24px 0; font-size: 19px; line-height: 1.4; font-weight: 500">Do I need a new phone number?
+<svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5CF0AE" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M12 5v14M5 12h14"></path></svg>
+</summary>
+<p style="margin: 0 0 24px; max-width: 620px; font-size: 16px; line-height: 1.65; color: #A3ADA8">No. You forward your existing number to Kinitomou, so customers keep calling the number they already have.</p>
+</details>
+<details style="border-bottom: 1px solid #1F2624">
+<summary style="list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 44px; padding: 24px 0; font-size: 19px; line-height: 1.4; font-weight: 500">Which languages does it speak?
+<svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5CF0AE" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M12 5v14M5 12h14"></path></svg>
+</summary>
+<p style="margin: 0 0 24px; max-width: 620px; font-size: 16px; line-height: 1.65; color: #A3ADA8">[LIST THE LANGUAGES KINITOMOU SUPPORTS]</p>
+</details>
+<details style="border-bottom: 1px solid #1F2624">
+<summary style="list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 44px; padding: 24px 0; font-size: 19px; line-height: 1.4; font-weight: 500">How much does it cost?
+<svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5CF0AE" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M12 5v14M5 12h14"></path></svg>
+</summary>
+<p style="margin: 0 0 24px; max-width: 620px; font-size: 16px; line-height: 1.65; color: #A3ADA8">[YOUR PRICING, e.g. monthly plans or price per call]. Book a demo and we'll recommend the right plan for your call volume.</p>
+</details>
+<details style="border-bottom: 1px solid #1F2624">
+<summary style="list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 44px; padding: 24px 0; font-size: 19px; line-height: 1.4; font-weight: 500">What happens to my callers' data?
+<svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5CF0AE" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M12 5v14M5 12h14"></path></svg>
+</summary>
+<p style="margin: 0 0 24px; max-width: 620px; font-size: 16px; line-height: 1.65; color: #A3ADA8">[HOW CALL DATA IS STORED AND PROTECTED, e.g. where it is hosted, how long it is kept, GDPR compliance]</p>
+</details>
 </div>
 </div>
 </section>
 
-<section id="who" style="background: #FFFFFF; border-top: 1px solid #E4E4DF">
-<div style="max-width: 1160px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 56px">
-<div style="max-width: 640px; display: flex; flex-direction: column; gap: 16px">
-<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #0D6B4B">Who it's for</span>
-<h2 style="margin: 0; font-family: 'Inter Tight', Inter, system-ui, sans-serif; font-size: clamp(32px, 4vw, 46px); line-height: 1.08; letter-spacing: -0.03em; font-weight: 600">Built for businesses that run on the phone.</h2>
-<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #575C57">If your customers call to book, ask or check in, Kinitomou can take those calls for you.</p>
-</div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 16px">
-<div style="display: flex; align-items: flex-start; gap: 16px; padding: 24px; border: 1px solid #E4E4DF; border-radius: 16px; background: #F7F7F4">
-<div style="flex: 0 0 auto; width: 44px; height: 44px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E4E4DF; display: flex; align-items: center; justify-content: center">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"></rect><path d="M12 8v8M8 12h8"></path></svg>
-</div>
-<div style="display: flex; flex-direction: column; gap: 6px">
-<h3 style="margin: 0; font-size: 18px; line-height: 1.3; font-weight: 600">Clinics and dental practices</h3>
-<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #575C57">Books appointments and answers questions about treatments and opening hours.</p>
-</div>
-</div>
-<div style="display: flex; align-items: flex-start; gap: 16px; padding: 24px; border: 1px solid #E4E4DF; border-radius: 16px; background: #F7F7F4">
-<div style="flex: 0 0 auto; width: 44px; height: 44px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E4E4DF; display: flex; align-items: center; justify-content: center">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M20 4L8.1 15.9M14.5 14.5L20 20M8.1 8.1L12 12"></path></svg>
-</div>
-<div style="display: flex; flex-direction: column; gap: 6px">
-<h3 style="margin: 0; font-size: 18px; line-height: 1.3; font-weight: 600">Salons and spas</h3>
-<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #575C57">Fills your schedule while your hands are busy with a client.</p>
-</div>
-</div>
-<div style="display: flex; align-items: flex-start; gap: 16px; padding: 24px; border: 1px solid #E4E4DF; border-radius: 16px; background: #F7F7F4">
-<div style="flex: 0 0 auto; width: 44px; height: 44px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E4E4DF; display: flex; align-items: center; justify-content: center">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
-</div>
-<div style="display: flex; flex-direction: column; gap: 6px">
-<h3 style="margin: 0; font-size: 18px; line-height: 1.3; font-weight: 600">Trades and home services</h3>
-<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #575C57">Catches new jobs while you're on site, and passes emergencies straight to you.</p>
-</div>
-</div>
-<div style="display: flex; align-items: flex-start; gap: 16px; padding: 24px; border: 1px solid #E4E4DF; border-radius: 16px; background: #F7F7F4">
-<div style="flex: 0 0 auto; width: 44px; height: 44px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E4E4DF; display: flex; align-items: center; justify-content: center">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"></path></svg>
-</div>
-<div style="display: flex; flex-direction: column; gap: 6px">
-<h3 style="margin: 0; font-size: 18px; line-height: 1.3; font-weight: 600">Law and accounting firms</h3>
-<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #575C57">Takes down new client enquiries and books first consultations.</p>
-</div>
-</div>
-<div style="display: flex; align-items: flex-start; gap: 16px; padding: 24px; border: 1px solid #E4E4DF; border-radius: 16px; background: #F7F7F4">
-<div style="flex: 0 0 auto; width: 44px; height: 44px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E4E4DF; display: flex; align-items: center; justify-content: center">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"></path><path d="M5 10v10h14V10"></path><path d="M10 20v-6h4v6"></path></svg>
-</div>
-<div style="display: flex; flex-direction: column; gap: 6px">
-<h3 style="margin: 0; font-size: 18px; line-height: 1.3; font-weight: 600">Real estate agencies</h3>
-<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #575C57">Answers questions about listings and books viewings, even on weekends.</p>
-</div>
-</div>
-<div style="display: flex; align-items: flex-start; gap: 16px; padding: 24px; border: 1px solid #E4E4DF; border-radius: 16px; background: #F7F7F4">
-<div style="flex: 0 0 auto; width: 44px; height: 44px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E4E4DF; display: flex; align-items: center; justify-content: center">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10"></path><path d="M17 3c-2 0-3 2-3 5s1 4 3 4v9"></path></svg>
-</div>
-<div style="display: flex; flex-direction: column; gap: 6px">
-<h3 style="margin: 0; font-size: 18px; line-height: 1.3; font-weight: 600">Restaurants and cafés</h3>
-<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #575C57">Takes reservations and answers questions about the menu during the busiest service.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
+<section id="demo" style="position: relative; overflow: hidden; border-top: 1px solid #1A201E; padding: 160px 24px">
+<div class="wave on" aria-hidden="true" style="position: absolute; top: 50%; left: 0; right: 0; height: 240px; margin-top: -120px; display: flex; align-items: center; justify-content: center; gap: 6px; opacity: 0.16">
 
-<section id="how" style="background: #151714; color: #F7F7F4">
-<div style="max-width: 1160px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 56px">
-<div style="max-width: 640px; display: flex; flex-direction: column; gap: 16px">
-<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #A9AEA8">How it works</span>
-<h2 style="margin: 0; font-family: 'Inter Tight', Inter, system-ui, sans-serif; font-size: clamp(32px, 4vw, 46px); line-height: 1.08; letter-spacing: -0.03em; font-weight: 600">Set it up once. Then it just answers.</h2>
-<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #B9BDB7">No new hardware and no new number. Your customers keep calling the one they already know.</p>
-</div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 40px">
-<div style="padding-top: 24px; border-top: 1px solid #3A3E38; display: flex; flex-direction: column; gap: 12px">
-<span style="font-family: 'Inter Tight', Inter, system-ui, sans-serif; font-size: 15px; font-weight: 600; color: #A9AEA8">01</span>
-<h3 style="margin: 0; font-size: 21px; line-height: 1.3; font-weight: 600; letter-spacing: -0.01em">Tell us about your business</h3>
-<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #B9BDB7">Share your services, hours, prices and the questions customers ask most. Kinitomou learns how you want each call handled.</p>
-</div>
-<div style="padding-top: 24px; border-top: 1px solid #3A3E38; display: flex; flex-direction: column; gap: 12px">
-<span style="font-family: 'Inter Tight', Inter, system-ui, sans-serif; font-size: 15px; font-weight: 600; color: #A9AEA8">02</span>
-<h3 style="margin: 0; font-size: 21px; line-height: 1.3; font-weight: 600; letter-spacing: -0.01em">Forward your calls</h3>
-<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #B9BDB7">Point your existing number to Kinitomou, all the time or only when you can't pick up.</p>
-</div>
-<div style="padding-top: 24px; border-top: 1px solid #3A3E38; display: flex; flex-direction: column; gap: 12px">
-<span style="font-family: 'Inter Tight', Inter, system-ui, sans-serif; font-size: 15px; font-weight: 600; color: #A9AEA8">03</span>
-<h3 style="margin: 0; font-size: 21px; line-height: 1.3; font-weight: 600; letter-spacing: -0.01em">Go live</h3>
-<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #B9BDB7">From the next call on, Kinitomou answers as your business and you get back to your work.</p>
-</div>
-</div>
-</div>
-</section>
+<span class="bar" style="width: 4px; height: 28px; animation-delay: 0.00s; background: #5CF0AE"></span>
 
-<section id="faq" style="max-width: 1160px; margin: 0 auto; padding: 104px 24px 0; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 56px">
-<div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
-<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #0D6B4B">FAQ</span>
-<h2 style="margin: 0; font-family: 'Inter Tight', Inter, system-ui, sans-serif; font-size: clamp(32px, 4vw, 46px); line-height: 1.08; letter-spacing: -0.03em; font-weight: 600">Questions, answered.</h2>
-<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #575C57">Don't see yours here? Ask us on a demo call.</p>
-</div>
-<div style="flex: 1.6 1 520px; min-width: 0; display: flex; flex-direction: column; border-top: 1px solid #E4E4DF">
-<details open="" style="border-bottom: 1px solid #E4E4DF">
-<summary style="list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 44px; padding: 20px 0; font-size: 18px; line-height: 1.4; font-weight: 600">Will callers know they're talking to an AI?
-<svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#151714" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M12 5v14M5 12h14"></path></svg>
-</summary>
-<p style="margin: 0 0 22px; max-width: 600px; font-size: 16px; line-height: 1.6; color: #575C57">Yes. Kinitomou speaks in a natural, friendly voice and is upfront about being an AI assistant, so callers always know who they're talking to.</p>
-</details>
-<details style="border-bottom: 1px solid #E4E4DF">
-<summary style="list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 44px; padding: 20px 0; font-size: 18px; line-height: 1.4; font-weight: 600">What if a caller wants to speak to a real person?
-<svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#151714" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M12 5v14M5 12h14"></path></svg>
-</summary>
-<p style="margin: 0 0 22px; max-width: 600px; font-size: 16px; line-height: 1.6; color: #575C57">Kinitomou transfers the call to you or your team, or takes a detailed message if nobody is available. You decide which calls get passed on.</p>
-</details>
-<details style="border-bottom: 1px solid #E4E4DF">
-<summary style="list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 44px; padding: 20px 0; font-size: 18px; line-height: 1.4; font-weight: 600">Do I need a new phone number?
-<svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#151714" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M12 5v14M5 12h14"></path></svg>
-</summary>
-<p style="margin: 0 0 22px; max-width: 600px; font-size: 16px; line-height: 1.6; color: #575C57">No. You forward your existing number to Kinitomou, so customers keep calling the number they already have.</p>
-</details>
-<details style="border-bottom: 1px solid #E4E4DF">
-<summary style="list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 44px; padding: 20px 0; font-size: 18px; line-height: 1.4; font-weight: 600">Which languages does it speak?
-<svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#151714" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M12 5v14M5 12h14"></path></svg>
-</summary>
-<p style="margin: 0 0 22px; max-width: 600px; font-size: 16px; line-height: 1.6; color: #575C57">[LIST THE LANGUAGES KINITOMOU SUPPORTS]</p>
-</details>
-<details style="border-bottom: 1px solid #E4E4DF">
-<summary style="list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 44px; padding: 20px 0; font-size: 18px; line-height: 1.4; font-weight: 600">How much does it cost?
-<svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#151714" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M12 5v14M5 12h14"></path></svg>
-</summary>
-<p style="margin: 0 0 22px; max-width: 600px; font-size: 16px; line-height: 1.6; color: #575C57">[YOUR PRICING, e.g. monthly plans or price per call]. Book a demo and we'll recommend the right plan for your call volume.</p>
-</details>
-<details style="border-bottom: 1px solid #E4E4DF">
-<summary style="list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 44px; padding: 20px 0; font-size: 18px; line-height: 1.4; font-weight: 600">What happens to my callers' data?
-<svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#151714" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M12 5v14M5 12h14"></path></svg>
-</summary>
-<p style="margin: 0 0 22px; max-width: 600px; font-size: 16px; line-height: 1.6; color: #575C57">[HOW CALL DATA IS STORED AND PROTECTED, e.g. where it is hosted, how long it is kept, GDPR compliance]</p>
-</details>
-</div>
-</section>
+<span class="bar" style="width: 4px; height: 166px; animation-delay: 0.08s; background: #5CF0AE"></span>
 
-<section id="demo" style="max-width: 1160px; margin: 0 auto; padding: 104px 24px">
-<div style="background: #FFFFFF; border: 1px solid #E4E4DF; border-radius: 28px; padding: clamp(44px, 7vw, 80px) clamp(24px, 5vw, 64px); display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center">
-<h2 style="margin: 0; max-width: 680px; font-family: 'Inter Tight', Inter, system-ui, sans-serif; font-size: clamp(32px, 4.4vw, 52px); line-height: 1.06; letter-spacing: -0.035em; font-weight: 600">Let Kinitomou take your next call.</h2>
-<p style="margin: 0; max-width: 520px; font-size: 18px; line-height: 1.6; color: #575C57">Book a short demo and hear it answer the phone as your business.</p>
-<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; padding-top: 8px">
-<a href="#demo" style="display: inline-flex; align-items: center; gap: 8px; min-height: 52px; box-sizing: border-box; padding: 14px 26px; border-radius: 12px; background: #0D6B4B; color: #FFFFFF; text-decoration: none; font-weight: 600; font-size: 16px">Book a demo
+<span class="bar" style="width: 4px; height: 211px; animation-delay: 0.17s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 92px; animation-delay: 0.25s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 99px; animation-delay: 0.33s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 126px; animation-delay: 0.42s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 48px; animation-delay: 0.50s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 23px; animation-delay: 0.58s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 106px; animation-delay: 0.66s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 171px; animation-delay: 0.75s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 89px; animation-delay: 0.83s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 121px; animation-delay: 0.91s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 198px; animation-delay: 1.00s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 118px; animation-delay: 1.08s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 27px; animation-delay: 0.01s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 21px; animation-delay: 0.10s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 88px; animation-delay: 0.18s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 66px; animation-delay: 0.26s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 113px; animation-delay: 0.34s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 218px; animation-delay: 0.43s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 157px; animation-delay: 0.51s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 37px; animation-delay: 0.59s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 109px; animation-delay: 0.68s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 55px; animation-delay: 0.76s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 32px; animation-delay: 0.84s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 76px; animation-delay: 0.93s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 179px; animation-delay: 1.01s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 154px; animation-delay: 1.09s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 45px; animation-delay: 0.02s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 173px; animation-delay: 0.11s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 146px; animation-delay: 0.19s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 42px; animation-delay: 0.27s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 20px; animation-delay: 0.36s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 92px; animation-delay: 0.44s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 113px; animation-delay: 0.52s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 45px; animation-delay: 0.61s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 192px; animation-delay: 0.69s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 199px; animation-delay: 0.77s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 67px; animation-delay: 0.85s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 79px; animation-delay: 0.94s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 56px; animation-delay: 1.02s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 45px; animation-delay: 1.10s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 37px; animation-delay: 0.04s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 160px; animation-delay: 0.12s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 198px; animation-delay: 0.20s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 75px; animation-delay: 0.29s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 123px; animation-delay: 0.37s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 153px; animation-delay: 0.45s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 67px; animation-delay: 0.53s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 20px; animation-delay: 0.62s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 85px; animation-delay: 0.70s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 145px; animation-delay: 0.78s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 67px; animation-delay: 0.87s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 138px; animation-delay: 0.95s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 212px; animation-delay: 1.03s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 123px; animation-delay: 1.12s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 40px; animation-delay: 0.05s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 51px; animation-delay: 0.13s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 56px; animation-delay: 0.21s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 46px; animation-delay: 0.30s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 118px; animation-delay: 0.38s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 213px; animation-delay: 0.46s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 147px; animation-delay: 0.55s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 57px; animation-delay: 0.63s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 139px; animation-delay: 0.71s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 83px; animation-delay: 0.80s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 21px; animation-delay: 0.88s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 67px; animation-delay: 0.96s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 157px; animation-delay: 1.04s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 133px; animation-delay: 1.13s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 65px; animation-delay: 0.06s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 193px; animation-delay: 0.14s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 161px; animation-delay: 0.23s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 42px; animation-delay: 0.31s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 41px; animation-delay: 0.39s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 60px; animation-delay: 0.48s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 86px; animation-delay: 0.56s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 59px; animation-delay: 0.64s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 196px; animation-delay: 0.72s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 197px; animation-delay: 0.81s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 55px; animation-delay: 0.89s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 105px; animation-delay: 0.97s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 88px; animation-delay: 1.06s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 23px; animation-delay: 1.14s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 40px; animation-delay: 0.07s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 147px; animation-delay: 0.16s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 180px; animation-delay: 0.24s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 56px; animation-delay: 0.32s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 146px; animation-delay: 0.40s; background: #5CF0AE"></span>
+
+<span class="bar" style="width: 4px; height: 176px; animation-delay: 0.49s; background: #5CF0AE"></span>
+
+</div>
+<div aria-hidden="true" style="position: absolute; top: 50%; left: 50%; width: 900px; height: 600px; margin: -300px 0 0 -450px; background: radial-gradient(closest-side, color-mix(in oklab, #5CF0AE 16%, transparent), transparent); pointer-events: none"></div>
+<div class="reveal" style="position: relative; max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 28px; text-align: center">
+<h2 style="margin: 0; font-size: clamp(48px, 8vw, 120px); line-height: 0.94; letter-spacing: -0.055em; font-weight: 600">Never miss another <span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: -0.02em; color: #5CF0AE">call.</span></h2>
+<p style="margin: 0; max-width: 520px; font-size: 19px; line-height: 1.6; color: #A3ADA8">Book a short demo and hear Kinitomou answer the phone as your business.</p>
+<a href="#demo" style="display: inline-flex; align-items: center; gap: 10px; min-height: 58px; box-sizing: border-box; padding: 16px 32px; border-radius: 999px; background: #5CF0AE; color: #03140C; text-decoration: none; font-weight: 600; font-size: 17px; box-shadow: 0 16px 50px -12px color-mix(in oklab, #5CF0AE 70%, transparent)">Book a demo
 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
 </a>
-</div>
-<p style="margin: 0; font-size: 15px; color: #62675F">Prefer email? Write to us at <a href="#demo">[YOUR EMAIL]</a></p>
+<p style="margin: 0; font-size: 15px; color: #A3ADA8">Prefer email? Write to us at <a href="#demo" style="color: #EEF3F0">[YOUR EMAIL]</a></p>
 </div>
 </section>
 
-<footer style="border-top: 1px solid #E4E4DF">
-<div style="max-width: 1160px; margin: 0 auto; padding: 28px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; font-size: 14px; color: #62675F">
-<div style="display: flex; align-items: center; gap: 10px">
-<svg width="22" height="22" viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="9" fill="#0D6B4B"></rect><path d="M9.5 12v6M13 9v12M16.5 11.5v7M20 13.5v3" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"></path></svg>
-<span style="font-family: 'Inter Tight', Inter, system-ui, sans-serif; font-weight: 700; font-size: 16px; letter-spacing: -0.02em; color: #151714">kinitomou</span>
+<footer style="border-top: 1px solid #1A201E">
+<div style="max-width: 1240px; margin: 0 auto; padding: 32px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; font-size: 14px; color: #7C8782">
+<div style="display: flex; align-items: center; gap: 12px">
+<svg width="22" height="22" viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="9" fill="#5CF0AE"></rect><path d="M9.5 12v6M13 9v12M16.5 11.5v7M20 13.5v3" stroke="#03140C" stroke-width="2.2" stroke-linecap="round"></path></svg>
+<span style="font-weight: 600; font-size: 16px; letter-spacing: -0.03em; color: #EEF3F0">kinitomou</span>
 <span>© 2026 Kinitomou</span>
 </div>
 <nav aria-label="Footer" style="display: flex; flex-wrap: wrap; gap: 24px">
-<a href="#" style="text-decoration: none; color: #575C57">Privacy</a>
-<a href="#" style="text-decoration: none; color: #575C57">Terms</a>
-<a href="#demo" style="text-decoration: none; color: #575C57">Contact</a>
+<a href="#" style="text-decoration: none; color: #A3ADA8">Privacy</a>
+<a href="#" style="text-decoration: none; color: #A3ADA8">Terms</a>
+<a href="#demo" style="text-decoration: none; color: #A3ADA8">Contact</a>
 </nav>
 </div>
 </footer>
 
 </div>
+<script>
+var HERO = [
+  { ai: true, text: 'Good evening, Smile Dental. How can I help?' },
+  { ai: false, text: 'Hi, my tooth has been hurting since yesterday. Can I come in this week?' },
+  { ai: true, text: 'Sorry to hear that. I can see you Thursday at 10:30 or Friday at 16:00.' },
+  { ai: false, text: 'Thursday, please.' },
+  { ai: true, text: "Done, you're booked for Thursday at 10:30. I'll text you a confirmation." }
+];
+
+var INDUSTRIES = [
+  { id: 'clinic', label: 'Clinic', title: 'Clinics and dental practices',
+    blurb: 'Fills your appointment book and answers patients’ questions, even after you’ve closed.',
+    tasks: ['Books, moves and cancels appointments', 'Answers questions about treatments and prices', 'Flags urgent cases to your team'],
+    convo: [
+      { ai: false, text: 'Do you take new patients? I’d like a check-up.' },
+      { ai: true, text: 'We do. I have Monday at 9:00 or Wednesday at 14:30. Which suits you?' },
+      { ai: false, text: 'Wednesday works.' }
+    ], outcome: 'Check-up booked · Wed 14:30', urgent: false },
+  { id: 'salon', label: 'Salon', title: 'Salons and spas',
+    blurb: 'Keeps your chairs full while your hands are busy with a client.',
+    tasks: ['Books treatments with the right stylist', 'Handles changes and cancellations', 'Answers questions about services and prices'],
+    convo: [
+      { ai: false, text: 'Can I get a cut and colour with Ioana on Saturday?' },
+      { ai: true, text: 'Ioana has 11:00 free on Saturday. Shall I book you in?' },
+      { ai: false, text: 'Perfect, yes please.' }
+    ], outcome: 'Cut and colour booked · Sat 11:00', urgent: false },
+  { id: 'trades', label: 'Trades', title: 'Trades and home services',
+    blurb: 'Catches new jobs while you’re on site, and sends emergencies straight to you.',
+    tasks: ['Takes job details and the address', 'Books quotes and site visits', 'Puts urgent calls through to you'],
+    convo: [
+      { ai: false, text: 'My boiler stopped working and there’s water on the floor.' },
+      { ai: true, text: 'That sounds urgent. I’m putting you through to Mihai right now.' }
+    ], outcome: 'Urgent call transferred to you', urgent: true },
+  { id: 'law', label: 'Law firm', title: 'Law and accounting firms',
+    blurb: 'Gives every new enquiry a prompt, professional first answer.',
+    tasks: ['Takes down new client enquiries', 'Books first consultations', 'Routes existing clients to the right person'],
+    convo: [
+      { ai: false, text: 'I need some advice about a rental contract.' },
+      { ai: true, text: 'I can book you a first consultation. Would Tuesday at 11:00 work?' },
+      { ai: false, text: 'Yes, thank you.' }
+    ], outcome: 'Consultation booked · Tue 11:00', urgent: false },
+  { id: 'realestate', label: 'Real estate', title: 'Real estate agencies',
+    blurb: 'Answers listing questions and books viewings, evenings and weekends included.',
+    tasks: ['Answers questions about listings', 'Books viewings in your calendar', 'Collects buyer details for follow-up'],
+    convo: [
+      { ai: false, text: 'Is the two-bedroom flat on Str. Florilor still available?' },
+      { ai: true, text: 'It is. I can book you a viewing on Saturday at 10:00 or 12:00.' },
+      { ai: false, text: '10:00, please.' }
+    ], outcome: 'Viewing booked · Sat 10:00', urgent: false },
+  { id: 'restaurant', label: 'Restaurant', title: 'Restaurants and cafés',
+    blurb: 'Takes reservations during the busiest service, so your staff can focus on guests.',
+    tasks: ['Takes and changes reservations', 'Answers questions about the menu and hours', 'Notes allergies and special requests'],
+    convo: [
+      { ai: false, text: 'Do you have a table for four tonight at eight?' },
+      { ai: true, text: 'I can do 20:00 for four. Any allergies I should note?' },
+      { ai: false, text: 'One vegetarian, thanks.' }
+    ], outcome: 'Table for four · Tonight 20:00', urgent: false }
+];
+
+var MARQUEE = ['Appointments', 'Rescheduling', 'Cancellations', 'Opening hours', 'Prices', 'Messages', 'Urgent transfers', 'Spam screening', 'Text confirmations'];
+
+var DAY_DOTS = [2.5, 6, 11, 29, 36, 40, 44, 49, 53, 57, 62, 68, 74, 79, 85, 89, 93, 97];
+
+function makeBars(n, seed, minH, maxH, color) {
+  var out = [];
+  for (var i = 0; i < n; i++) {
+    var v = Math.abs(Math.sin(i * 0.9 + seed) * Math.cos(i * 0.37 + seed * 1.7));
+    out.push({ px: Math.round(minH + v * (maxH - minH)), d: ((i * 0.083) % 1.15).toFixed(2), c: color });
+  }
+  return out;
+}
+
+function bubble(m, accent) {
+  return {
+    text: m.text,
+    label: m.ai ? 'KINITOMOU' : 'CALLER',
+    align: m.ai ? 'flex-end' : 'flex-start',
+    bg: m.ai ? '#15211C' : '#181E1C',
+    border: m.ai ? '#24392F' : '#262D2B',
+    labelColor: m.ai ? accent : '#7C8782',
+    radius: m.ai ? '16px 16px 4px 16px' : '16px 16px 16px 4px'
+  };
+}
+var ACCENT = '#5CF0AE';
+var T = {"msg": "<div class=\"msg\" style=\"align-self: {{m.align}}; max-width: 84%; display: flex; flex-direction: column; align-items: {{m.align}}; gap: 6px\">\n<span style=\"font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.1em; color: {{m.labelColor}}\">{{m.label}}</span>\n<p style=\"margin: 0; padding: 12px 15px; border-radius: {{m.radius}}; background: {{m.bg}}; border: 1px solid {{m.border}}; font-size: 15px; line-height: 1.5; color: #EEF3F0\">{{m.text}}</p>\n</div>", "typing": "<div class=\"typing\" style=\"align-self: {{typingAlign}}; display: flex; align-items: center; gap: 5px; padding: 14px 16px; border-radius: 14px; background: #161C1A; border: 1px solid #232B29\">\n<span class=\"dot\"></span><span class=\"dot\"></span><span class=\"dot\"></span>\n</div>", "booked": "<div class=\"msg\" style=\"display: flex; align-items: center; gap: 14px; padding: 16px 22px; border-top: 1px solid #1F2624; background: color-mix(in oklab, #5CF0AE 9%, #0F1413)\">\n<div style=\"flex: 0 0 auto; width: 36px; height: 36px; border-radius: 50%; background: #5CF0AE; display: flex; align-items: center; justify-content: center\">\n<svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#03140C\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12.5l4.5 4.5L19 7.5\"></path></svg>\n</div>\n<div style=\"display: flex; flex-direction: column; gap: 2px\">\n<span style=\"font-size: 14px; font-weight: 600\">Appointment booked · Thu 10:30</span>\n<span style=\"font-size: 13px; color: #A3ADA8\">Added to the calendar. Summary sent to the team.</span>\n</div>\n</div>", "notBooked": "<div style=\"display: flex; align-items: center; gap: 14px; padding: 16px 22px; border-top: 1px solid #1F2624; min-height: 68px; box-sizing: border-box\">\n<div style=\"flex: 0 0 auto; width: 36px; height: 36px; border-radius: 50%; border: 1px dashed #2E3835\"></div>\n<span style=\"font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.08em; color: #7C8782\">HANDLING CALL…</span>\n</div>", "tab": "<button type=\"button\" data-id=\"{{it.id}}\" aria-pressed=\"{{it.pressed}}\" style=\"min-height: 46px; padding: 10px 20px; border-radius: 999px; border: 1px solid {{it.border}}; background: {{it.bg}}; color: {{it.fg}}; font-family: Geist, system-ui, sans-serif; font-size: 15px; font-weight: 500; cursor: pointer\">{{it.label}}</button>", "task": "<div style=\"display: flex; align-items: center; gap: 14px; padding: 16px 0; border-bottom: 1px solid #1F2624\">\n<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#5CF0AE\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\" style=\"flex: 0 0 auto\"><path d=\"M5 12.5l4.5 4.5L19 7.5\"></path></svg>\n<span style=\"font-size: 16px; line-height: 1.4\">{{t}}</span>\n</div>", "convo": "<div class=\"msg\" style=\"align-self: {{m.align}}; max-width: 86%; display: flex; flex-direction: column; align-items: {{m.align}}; gap: 6px\">\n<span style=\"font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.1em; color: {{m.labelColor}}\">{{m.label}}</span>\n<p style=\"margin: 0; padding: 12px 15px; border-radius: {{m.radius}}; background: {{m.bg}}; border: 1px solid {{m.border}}; font-size: 15px; line-height: 1.5; color: #EEF3F0\">{{m.text}}</p>\n</div>", "pause": "<svg width=\"26\" height=\"26\" viewBox=\"0 0 24 24\" fill=\"currentColor\" aria-hidden=\"true\"><rect x=\"6\" y=\"5\" width=\"4\" height=\"14\" rx=\"1\"></rect><rect x=\"14\" y=\"5\" width=\"4\" height=\"14\" rx=\"1\"></rect></svg>", "play": "<svg width=\"26\" height=\"26\" viewBox=\"0 0 24 24\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M8 5v14l11-7z\"></path></svg>"};
+function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+function fill(tpl, obj, name) {
+  return tpl.replace(/\{\{\s*([\w.]+)\s*\}\}/g, function (_, p) {
+    var parts = p.split('.'); if (parts[0] === name) parts.shift();
+    var v = obj; for (var i = 0; i < parts.length; i++) v = v == null ? '' : v[parts[i]];
+    return esc(v == null ? '' : v);
+  });
+}
+
+// live call loop
+var step = 1, msgsEl = document.getElementById('hero-msgs'), statusEl = document.getElementById('hero-status');
+function renderHero() {
+  var shown = Math.min(step, HERO.length);
+  var existing = msgsEl.querySelectorAll('.msg').length;
+  if (shown < existing) { msgsEl.innerHTML = ''; existing = 0; }
+  var t = msgsEl.querySelector('.typing'); if (t) t.remove();
+  for (var i = existing; i < shown; i++) msgsEl.insertAdjacentHTML('beforeend', fill(T.msg, bubble(HERO[i], ACCENT), 'm'));
+  if (step < HERO.length) {
+    var next = HERO[shown];
+    msgsEl.insertAdjacentHTML('beforeend', fill(T.typing, { typingAlign: next && next.ai ? 'flex-end' : 'flex-start' }, '_'));
+  }
+  var booked = step > HERO.length ? '1' : '0';
+  if (statusEl.dataset.b !== booked) { statusEl.innerHTML = booked === '1' ? T.booked : T.notBooked; statusEl.dataset.b = booked; }
+}
+renderHero();
+setInterval(function () { step = step >= HERO.length + 4 ? 1 : step + 1; renderHero(); }, 1700);
+
+// industry switcher
+var sel = 'clinic', tabs = document.getElementById('ind-tabs');
+function renderInd(focusId) {
+  tabs.innerHTML = INDUSTRIES.map(function (x) {
+    var on = x.id === sel;
+    return fill(T.tab, { id: x.id, label: x.label, pressed: on ? 'true' : 'false', bg: on ? ACCENT : 'rgba(18,23,22,0.6)', fg: on ? '#03140C' : '#C9D1CD', border: on ? ACCENT : '#2A3230' }, 'it');
+  }).join('');
+  var s = INDUSTRIES.filter(function (x) { return x.id === sel; })[0];
+  document.getElementById('ind-title').textContent = s.title;
+  document.getElementById('ind-blurb').textContent = s.blurb;
+  document.getElementById('ind-tasks').innerHTML = s.tasks.map(function (t) { return fill(T.task, t, 't'); }).join('');
+  document.getElementById('ind-convo').innerHTML = s.convo.map(function (m) { return fill(T.convo, bubble(m, ACCENT), 'm'); }).join('');
+  document.getElementById('ind-outcome').textContent = s.outcome;
+  document.getElementById('ind-dot').style.background = s.urgent ? '#F5B652' : ACCENT;
+  if (focusId) { var b = tabs.querySelector('button[data-id="' + focusId + '"]'); if (b) b.focus(); }
+}
+tabs.addEventListener('click', function (e) {
+  var b = e.target.closest('button[data-id]'); if (!b) return;
+  sel = b.getAttribute('data-id'); renderInd(sel);
+});
+renderInd();
+
+// sample-call player (visual until a recording is added)
+var playing = false, playBtn = document.getElementById('play-btn'), playIcon = document.getElementById('play-icon'), wave = document.getElementById('listen-wave');
+function renderPlay() {
+  playIcon.innerHTML = playing ? T.pause : T.play;
+  wave.classList.toggle('on', playing);
+  playBtn.setAttribute('aria-label', playing ? 'Pause sample call' : 'Play sample call');
+}
+playBtn.addEventListener('click', function () { playing = !playing; renderPlay(); });
+renderPlay();
+</script>
 </body>
 </html>
