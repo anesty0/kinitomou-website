@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kinitomou — your AI receptionist</title>
+<meta name="description" content="Kinitomou is an AI receptionist that answers your business phone day and night. It books appointments, answers questions and takes messages while you get on with your work.">
+<meta property="og:title" content="Kinitomou — the receptionist that never misses a call">
+<meta property="og:description" content="An AI receptionist that answers your business phone day and night.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#F7F7F4">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Inter+Tight:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+html,body{overflow-x:clip}
+@media (max-width:600px){.nav-link{display:none}}
+body{margin:0;background:#F7F7F4}
+section[id]{scroll-margin-top:16px}
+a{color:#151714}a:hover{color:#0D6B4B}
+h1,h2,h3{text-wrap:balance}
+p{text-wrap:pretty}
+.dots{background-image:radial-gradient(#D6D6CF 1px, transparent 1px);background-size:16px 16px}
+summary::-webkit-details-marker{display:none}
+.faq-icon{transition:transform .2s ease}
+details[open] .faq-icon{transform:rotate(45deg)}
+</style>
+</head>
+<body>
+<div style="font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif; color: #151714; background: #F7F7F4; -webkit-font-smoothing: antialiased">
+
+<header style="border-bottom: 1px solid #E4E4DF; background: #F7F7F4">
+<div style="max-width: 1160px; margin: 0 auto; padding: 16px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+<a href="#top" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #151714">
+<svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="9" fill="#0D6B4B"></rect><path d="M9.5 12v6M13 9v12M16.5 11.5v7M20 13.5v3" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"></path></svg>
+<span style="font-family: 'Inter Tight', Inter, system-ui, sans-serif; font-weight: 700; font-size: 21px; letter-spacing: -0.02em">kinitomou</span>
+</a>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; gap: 28px; font-size: 15px; font-weight: 500">
+<a class="nav-link" href="#handles" style="text-decoration: none">What it handles</a>
+<a class="nav-link" href="#how" style="text-decoration: none">How it works</a>
+<a class="nav-link" href="#faq" style="text-decoration: none">FAQ</a>
+<a href="#demo" style="display: inline-flex; align-items: center; min-height: 44px; box-sizing: border-box; padding: 10px 18px; border-radius: 10px; background: #0D6B4B; color: #FFFFFF; text-decoration: none; font-weight: 600">Book a demo</a>
+</nav>
+</div>
+</header>
+
+<section id="top" style="max-width: 1160px; margin: 0 auto; padding: 88px 24px 104px; display: flex; flex-wrap: wrap; align-items: center; gap: 72px">
+<div style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 28px">
+<h1 style="margin: 0; font-family: 'Inter Tight', Inter, system-ui, sans-serif; font-size: clamp(42px, 6vw, 70px); line-height: 1.02; letter-spacing: -0.035em; font-weight: 600">The receptionist that never misses a call.</h1>
+<p style="margin: 0; max-width: 520px; font-size: 19px; line-height: 1.6; color: #575C57">Kinitomou is an AI receptionist that answers your business phone day and night. It books appointments, answers questions and takes messages while you get on with your work.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a href="#demo" style="display: inline-flex; align-items: center; gap: 8px; min-height: 52px; box-sizing: border-box; padding: 14px 24px; border-radius: 12px; background: #0D6B4B; color: #FFFFFF; text-decoration: none; font-weight: 600; font-size: 16px">Book a demo
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+</a>
+<a href="#how" style="display: inline-flex; align-items: center; min-height: 52px; box-sizing: border-box; padding: 14px 24px; border-radius: 12px; background: #FFFFFF; border: 1px solid #D6D6D0; color: #151714; text-decoration: none; font-weight: 600; font-size: 16px">See how it works</a>
+</div>
+</div>
+
+<div style="flex: 1 1 400px; min-width: 0; position: relative">
+<div class="dots" aria-hidden="true" style="position: absolute; top: -28px; right: -28px; bottom: -28px; left: 40px; border-radius: 28px"></div>
+<div style="position: relative; background: #FFFFFF; border: 1px solid #E4E4DF; border-radius: 20px; box-shadow: 0 1px 2px rgba(21,23,20,0.04), 0 28px 56px -28px rgba(21,23,20,0.22); overflow: hidden">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 20px; border-bottom: 1px solid #EEEEEA">
+<div style="display: flex; align-items: center; gap: 12px">
+<div style="width: 40px; height: 40px; border-radius: 50%; background: #F0F0EC; display: flex; align-items: center; justify-content: center">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"></path></svg>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 15px; font-weight: 600">Example call</span>
+<span style="font-size: 13px; color: #62675F">Dental clinic · Tuesday, 8:47 p.m.</span>
+</div>
+</div>
+<span style="display: flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 999px; background: #F0F0EC; font-size: 12px; font-weight: 600; color: #151714">
+<span style="width: 7px; height: 7px; border-radius: 50%; background: #0D6B4B"></span>
+<span>After hours</span>
+</span>
+</div>
+
+<div style="padding: 22px 20px; display: flex; flex-direction: column; gap: 14px">
+<div style="align-self: flex-start; max-width: 82%; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; font-weight: 500; color: #62675F">Caller</span>
+<p style="margin: 0; padding: 12px 14px; border-radius: 14px 14px 14px 4px; background: #F2F2EE; font-size: 15px; line-height: 1.5">Hi, my tooth has been hurting since yesterday. Can I come in this week?</p>
+</div>
+<div style="align-self: flex-end; max-width: 82%; display: flex; flex-direction: column; align-items: flex-end; gap: 6px">
+<span style="font-size: 12px; font-weight: 500; color: #62675F">Kinitomou</span>
+<p style="margin: 0; padding: 12px 14px; border-radius: 14px 14px 4px 14px; background: #151714; color: #FFFFFF; font-size: 15px; line-height: 1.5">Sorry to hear that. I can fit you in Thursday at 10:30 or Friday at 4:00. Which works better?</p>
+</div>
+<div style="align-self: flex-start; max-width: 82%; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; font-weight: 500; color: #62675F">Caller</span>
+<p style="margin: 0; padding: 12px 14px; border-radius: 14px 14px 14px 4px; background: #F2F2EE; font-size: 15px; line-height: 1.5">Thursday, please.</p>
+</div>
+<div style="align-self: flex-end; max-width: 82%; display: flex; flex-direction: column; align-items: flex-end; gap: 6px">
+<span style="font-size: 12px; font-weight: 500; color: #62675F">Kinitomou</span>
+<p style="margin: 0; padding: 12px 14px; border-radius: 14px 14px 4px 14px; background: #151714; color: #FFFFFF; font-size: 15px; line-height: 1.5">You're all set for Thursday at 10:30. I'll text you a confirmation now.</p>
+</div>
+</div>
+
+<div style="display: flex; align-items: center; gap: 14px; padding: 16px 20px; border-top: 1px solid #EEEEEA; background: #FAFAF8">
+<div style="flex: 0 0 auto; width: 36px; height: 36px; border-radius: 50%; background: #0D6B4B; display: flex; align-items: center; justify-content: center">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 14px; font-weight: 600">Appointment booked · Thu, 10:30</span>
+<span style="font-size: 13px; color: #62675F">Added to the clinic's calendar. Summary sent to the team.</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section style="background: #FFFFFF; border-top: 1px solid #E4E4DF; border-bottom: 1px solid #E4E4DF">
+<div style="max-width: 1160px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 56px">
+<div style="max-width: 640px; display: flex; flex-direction: column; gap: 16px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #0D6B4B">Why Kinitomou</span>
+<h2 style="margin: 0; font-family: 'Inter Tight', Inter, system-ui, sans-serif; font-size: clamp(32px, 4vw, 46px); line-height: 1.08; letter-spacing: -0.03em; font-weight: 600">Missed calls are missed customers.</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #575C57">You're with a client, out on a job or closed for the night, and the phone rings. A caller who reaches voicemail often hangs up and tries the next business on the list.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 24px">
+<div style="padding: 28px; border: 1px solid #E4E4DF; border-radius: 16px; background: #F7F7F4; display: flex; flex-direction: column; gap: 14px">
+<div style="width: 44px; height: 44px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E4E4DF; display: flex; align-items: center; justify-content: center">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+</div>
+<h3 style="margin: 0; font-size: 20px; line-height: 1.3; font-weight: 600; letter-spacing: -0.01em">Always picks up</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #575C57">Answers on the first ring at any hour, including evenings, weekends and holidays.</p>
+</div>
+<div style="padding: 28px; border: 1px solid #E4E4DF; border-radius: 16px; background: #F7F7F4; display: flex; flex-direction: column; gap: 14px">
+<div style="width: 44px; height: 44px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E4E4DF; display: flex; align-items: center; justify-content: center">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg>
+</div>
+<h3 style="margin: 0; font-size: 20px; line-height: 1.3; font-weight: 600; letter-spacing: -0.01em">Sounds like your front desk</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #575C57">A warm, natural voice that greets callers in your business's name and knows your services, hours and prices.</p>
+</div>
+<div style="padding: 28px; border: 1px solid #E4E4DF; border-radius: 16px; background: #F7F7F4; display: flex; flex-direction: column; gap: 14px">
+<div style="width: 44px; height: 44px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E4E4DF; display: flex; align-items: center; justify-content: center">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><path d="M8 9h8M8 13h5"></path></svg>
+</div>
+<h3 style="margin: 0; font-size: 20px; line-height: 1.3; font-weight: 600; letter-spacing: -0.01em">Keeps you in the loop</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #575C57">After every call you get a short summary: who called, what they needed and what happens next.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="handles" style="max-width: 1160px; margin: 0 auto; padding: 104px 24px; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 56px">
+<div style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #0D6B4B">What it handles</span>
+<h2 style="margin: 0; font-family: 'Inter Tight', Inter, system-ui, sans-serif; font-size: clamp(32px, 4vw, 46px); line-height: 1.08; letter-spacing: -0.03em; font-weight: 600">The calls that fill your day.</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #575C57">Kinitomou handles routine calls from start to finish, and knows when a caller needs you instead.</p>
+</div>
+<div style="flex: 1.5 1 480px; min-width: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); gap: 12px">
+<div style="display: flex; align-items: center; gap: 14px; padding: 18px 20px; border: 1px solid #E4E4DF; border-radius: 14px; background: #FFFFFF">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+<span style="font-size: 16px; line-height: 1.4; font-weight: 500">Booking, rescheduling and cancellations</span>
+</div>
+<div style="display: flex; align-items: center; gap: 14px; padding: 18px 20px; border: 1px solid #E4E4DF; border-radius: 14px; background: #FFFFFF">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+<span style="font-size: 16px; line-height: 1.4; font-weight: 500">Questions about hours, prices and location</span>
+</div>
+<div style="display: flex; align-items: center; gap: 14px; padding: 18px 20px; border: 1px solid #E4E4DF; border-radius: 14px; background: #FFFFFF">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+<span style="font-size: 16px; line-height: 1.4; font-weight: 500">Taking clear, detailed messages</span>
+</div>
+<div style="display: flex; align-items: center; gap: 14px; padding: 18px 20px; border: 1px solid #E4E4DF; border-radius: 14px; background: #FFFFFF">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+<span style="font-size: 16px; line-height: 1.4; font-weight: 500">Passing urgent calls straight to you</span>
+</div>
+<div style="display: flex; align-items: center; gap: 14px; padding: 18px 20px; border: 1px solid #E4E4DF; border-radius: 14px; background: #FFFFFF">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+<span style="font-size: 16px; line-height: 1.4; font-weight: 500">Screening out spam and sales calls</span>
+</div>
+<div style="display: flex; align-items: center; gap: 14px; padding: 18px 20px; border: 1px solid #E4E4DF; border-radius: 14px; background: #FFFFFF">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+<span style="font-size: 16px; line-height: 1.4; font-weight: 500">Texting confirmations and links to callers</span>
+</div>
+</div>
+</section>
+
+<section id="who" style="background: #FFFFFF; border-top: 1px solid #E4E4DF">
+<div style="max-width: 1160px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 56px">
+<div style="max-width: 640px; display: flex; flex-direction: column; gap: 16px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #0D6B4B">Who it's for</span>
+<h2 style="margin: 0; font-family: 'Inter Tight', Inter, system-ui, sans-serif; font-size: clamp(32px, 4vw, 46px); line-height: 1.08; letter-spacing: -0.03em; font-weight: 600">Built for businesses that run on the phone.</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #575C57">If your customers call to book, ask or check in, Kinitomou can take those calls for you.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 16px">
+<div style="display: flex; align-items: flex-start; gap: 16px; padding: 24px; border: 1px solid #E4E4DF; border-radius: 16px; background: #F7F7F4">
+<div style="flex: 0 0 auto; width: 44px; height: 44px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E4E4DF; display: flex; align-items: center; justify-content: center">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"></rect><path d="M12 8v8M8 12h8"></path></svg>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<h3 style="margin: 0; font-size: 18px; line-height: 1.3; font-weight: 600">Clinics and dental practices</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #575C57">Books appointments and answers questions about treatments and opening hours.</p>
+</div>
+</div>
+<div style="display: flex; align-items: flex-start; gap: 16px; padding: 24px; border: 1px solid #E4E4DF; border-radius: 16px; background: #F7F7F4">
+<div style="flex: 0 0 auto; width: 44px; height: 44px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E4E4DF; display: flex; align-items: center; justify-content: center">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M20 4L8.1 15.9M14.5 14.5L20 20M8.1 8.1L12 12"></path></svg>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<h3 style="margin: 0; font-size: 18px; line-height: 1.3; font-weight: 600">Salons and spas</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #575C57">Fills your schedule while your hands are busy with a client.</p>
+</div>
+</div>
+<div style="display: flex; align-items: flex-start; gap: 16px; padding: 24px; border: 1px solid #E4E4DF; border-radius: 16px; background: #F7F7F4">
+<div style="flex: 0 0 auto; width: 44px; height: 44px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E4E4DF; display: flex; align-items: center; justify-content: center">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<h3 style="margin: 0; font-size: 18px; line-height: 1.3; font-weight: 600">Trades and home services</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #575C57">Catches new jobs while you're on site, and passes emergencies straight to you.</p>
+</div>
+</div>
+<div style="display: flex; align-items: flex-start; gap: 16px; padding: 24px; border: 1px solid #E4E4DF; border-radius: 16px; background: #F7F7F4">
+<div style="flex: 0 0 auto; width: 44px; height: 44px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E4E4DF; display: flex; align-items: center; justify-content: center">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"></path></svg>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<h3 style="margin: 0; font-size: 18px; line-height: 1.3; font-weight: 600">Law and accounting firms</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #575C57">Takes down new client enquiries and books first consultations.</p>
+</div>
+</div>
+<div style="display: flex; align-items: flex-start; gap: 16px; padding: 24px; border: 1px solid #E4E4DF; border-radius: 16px; background: #F7F7F4">
+<div style="flex: 0 0 auto; width: 44px; height: 44px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E4E4DF; display: flex; align-items: center; justify-content: center">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"></path><path d="M5 10v10h14V10"></path><path d="M10 20v-6h4v6"></path></svg>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<h3 style="margin: 0; font-size: 18px; line-height: 1.3; font-weight: 600">Real estate agencies</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #575C57">Answers questions about listings and books viewings, even on weekends.</p>
+</div>
+</div>
+<div style="display: flex; align-items: flex-start; gap: 16px; padding: 24px; border: 1px solid #E4E4DF; border-radius: 16px; background: #F7F7F4">
+<div style="flex: 0 0 auto; width: 44px; height: 44px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E4E4DF; display: flex; align-items: center; justify-content: center">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D6B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10"></path><path d="M17 3c-2 0-3 2-3 5s1 4 3 4v9"></path></svg>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<h3 style="margin: 0; font-size: 18px; line-height: 1.3; font-weight: 600">Restaurants and cafés</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #575C57">Takes reservations and answers questions about the menu during the busiest service.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="how" style="background: #151714; color: #F7F7F4">
+<div style="max-width: 1160px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 56px">
+<div style="max-width: 640px; display: flex; flex-direction: column; gap: 16px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #A9AEA8">How it works</span>
+<h2 style="margin: 0; font-family: 'Inter Tight', Inter, system-ui, sans-serif; font-size: clamp(32px, 4vw, 46px); line-height: 1.08; letter-spacing: -0.03em; font-weight: 600">Set it up once. Then it just answers.</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #B9BDB7">No new hardware and no new number. Your customers keep calling the one they already know.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 40px">
+<div style="padding-top: 24px; border-top: 1px solid #3A3E38; display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'Inter Tight', Inter, system-ui, sans-serif; font-size: 15px; font-weight: 600; color: #A9AEA8">01</span>
+<h3 style="margin: 0; font-size: 21px; line-height: 1.3; font-weight: 600; letter-spacing: -0.01em">Tell us about your business</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #B9BDB7">Share your services, hours, prices and the questions customers ask most. Kinitomou learns how you want each call handled.</p>
+</div>
+<div style="padding-top: 24px; border-top: 1px solid #3A3E38; display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'Inter Tight', Inter, system-ui, sans-serif; font-size: 15px; font-weight: 600; color: #A9AEA8">02</span>
+<h3 style="margin: 0; font-size: 21px; line-height: 1.3; font-weight: 600; letter-spacing: -0.01em">Forward your calls</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #B9BDB7">Point your existing number to Kinitomou, all the time or only when you can't pick up.</p>
+</div>
+<div style="padding-top: 24px; border-top: 1px solid #3A3E38; display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'Inter Tight', Inter, system-ui, sans-serif; font-size: 15px; font-weight: 600; color: #A9AEA8">03</span>
+<h3 style="margin: 0; font-size: 21px; line-height: 1.3; font-weight: 600; letter-spacing: -0.01em">Go live</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #B9BDB7">From the next call on, Kinitomou answers as your business and you get back to your work.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="faq" style="max-width: 1160px; margin: 0 auto; padding: 104px 24px 0; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 56px">
+<div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #0D6B4B">FAQ</span>
+<h2 style="margin: 0; font-family: 'Inter Tight', Inter, system-ui, sans-serif; font-size: clamp(32px, 4vw, 46px); line-height: 1.08; letter-spacing: -0.03em; font-weight: 600">Questions, answered.</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #575C57">Don't see yours here? Ask us on a demo call.</p>
+</div>
+<div style="flex: 1.6 1 520px; min-width: 0; display: flex; flex-direction: column; border-top: 1px solid #E4E4DF">
+<details open="" style="border-bottom: 1px solid #E4E4DF">
+<summary style="list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 44px; padding: 20px 0; font-size: 18px; line-height: 1.4; font-weight: 600">Will callers know they're talking to an AI?
+<svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#151714" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M12 5v14M5 12h14"></path></svg>
+</summary>
+<p style="margin: 0 0 22px; max-width: 600px; font-size: 16px; line-height: 1.6; color: #575C57">Yes. Kinitomou speaks in a natural, friendly voice and is upfront about being an AI assistant, so callers always know who they're talking to.</p>
+</details>
+<details style="border-bottom: 1px solid #E4E4DF">
+<summary style="list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 44px; padding: 20px 0; font-size: 18px; line-height: 1.4; font-weight: 600">What if a caller wants to speak to a real person?
+<svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#151714" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M12 5v14M5 12h14"></path></svg>
+</summary>
+<p style="margin: 0 0 22px; max-width: 600px; font-size: 16px; line-height: 1.6; color: #575C57">Kinitomou transfers the call to you or your team, or takes a detailed message if nobody is available. You decide which calls get passed on.</p>
+</details>
+<details style="border-bottom: 1px solid #E4E4DF">
+<summary style="list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 44px; padding: 20px 0; font-size: 18px; line-height: 1.4; font-weight: 600">Do I need a new phone number?
+<svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#151714" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M12 5v14M5 12h14"></path></svg>
+</summary>
+<p style="margin: 0 0 22px; max-width: 600px; font-size: 16px; line-height: 1.6; color: #575C57">No. You forward your existing number to Kinitomou, so customers keep calling the number they already have.</p>
+</details>
+<details style="border-bottom: 1px solid #E4E4DF">
+<summary style="list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 44px; padding: 20px 0; font-size: 18px; line-height: 1.4; font-weight: 600">Which languages does it speak?
+<svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#151714" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M12 5v14M5 12h14"></path></svg>
+</summary>
+<p style="margin: 0 0 22px; max-width: 600px; font-size: 16px; line-height: 1.6; color: #575C57">[LIST THE LANGUAGES KINITOMOU SUPPORTS]</p>
+</details>
+<details style="border-bottom: 1px solid #E4E4DF">
+<summary style="list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 44px; padding: 20px 0; font-size: 18px; line-height: 1.4; font-weight: 600">How much does it cost?
+<svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#151714" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M12 5v14M5 12h14"></path></svg>
+</summary>
+<p style="margin: 0 0 22px; max-width: 600px; font-size: 16px; line-height: 1.6; color: #575C57">[YOUR PRICING, e.g. monthly plans or price per call]. Book a demo and we'll recommend the right plan for your call volume.</p>
+</details>
+<details style="border-bottom: 1px solid #E4E4DF">
+<summary style="list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 44px; padding: 20px 0; font-size: 18px; line-height: 1.4; font-weight: 600">What happens to my callers' data?
+<svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#151714" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M12 5v14M5 12h14"></path></svg>
+</summary>
+<p style="margin: 0 0 22px; max-width: 600px; font-size: 16px; line-height: 1.6; color: #575C57">[HOW CALL DATA IS STORED AND PROTECTED, e.g. where it is hosted, how long it is kept, GDPR compliance]</p>
+</details>
+</div>
+</section>
+
+<section id="demo" style="max-width: 1160px; margin: 0 auto; padding: 104px 24px">
+<div style="background: #FFFFFF; border: 1px solid #E4E4DF; border-radius: 28px; padding: clamp(44px, 7vw, 80px) clamp(24px, 5vw, 64px); display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center">
+<h2 style="margin: 0; max-width: 680px; font-family: 'Inter Tight', Inter, system-ui, sans-serif; font-size: clamp(32px, 4.4vw, 52px); line-height: 1.06; letter-spacing: -0.035em; font-weight: 600">Let Kinitomou take your next call.</h2>
+<p style="margin: 0; max-width: 520px; font-size: 18px; line-height: 1.6; color: #575C57">Book a short demo and hear it answer the phone as your business.</p>
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; padding-top: 8px">
+<a href="#demo" style="display: inline-flex; align-items: center; gap: 8px; min-height: 52px; box-sizing: border-box; padding: 14px 26px; border-radius: 12px; background: #0D6B4B; color: #FFFFFF; text-decoration: none; font-weight: 600; font-size: 16px">Book a demo
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+</a>
+</div>
+<p style="margin: 0; font-size: 15px; color: #62675F">Prefer email? Write to us at <a href="#demo">[YOUR EMAIL]</a></p>
+</div>
+</section>
+
+<footer style="border-top: 1px solid #E4E4DF">
+<div style="max-width: 1160px; margin: 0 auto; padding: 28px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; font-size: 14px; color: #62675F">
+<div style="display: flex; align-items: center; gap: 10px">
+<svg width="22" height="22" viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="9" fill="#0D6B4B"></rect><path d="M9.5 12v6M13 9v12M16.5 11.5v7M20 13.5v3" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"></path></svg>
+<span style="font-family: 'Inter Tight', Inter, system-ui, sans-serif; font-weight: 700; font-size: 16px; letter-spacing: -0.02em; color: #151714">kinitomou</span>
+<span>© 2026 Kinitomou</span>
+</div>
+<nav aria-label="Footer" style="display: flex; flex-wrap: wrap; gap: 24px">
+<a href="#" style="text-decoration: none; color: #575C57">Privacy</a>
+<a href="#" style="text-decoration: none; color: #575C57">Terms</a>
+<a href="#demo" style="text-decoration: none; color: #575C57">Contact</a>
+</nav>
+</div>
+</footer>
+
+</div>
+</body>
+</html>
